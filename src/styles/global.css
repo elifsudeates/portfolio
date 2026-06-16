@@ -48,6 +48,9 @@ body {
   margin: 0 auto;
   padding: 0 20px;
 }
+.container-wide {
+  max-width: 1100px;
+}
 
 a {
   color: var(--accent);
@@ -84,6 +87,9 @@ a:hover {
   width: 28px;
   height: 28px;
   border-radius: 8px;
+}
+:root.dark .nav-logo {
+  filter: invert(1);
 }
 .nav-links {
   display: flex;
@@ -141,6 +147,9 @@ a:hover {
 .card-grid {
   display: grid;
   gap: 16px;
+}
+.repo-grid {
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
 }
 
 /* ---------- Meta / Tags ---------- */

@@ -7,12 +7,13 @@ const repos = await getRepos();
 ---
 
 <Base title="Projects — Çağatay Üresin">
-  <section class="container" style="padding-top:48px">
+  <section class="container container-wide" style="padding-top:48px">
     <h1 style="letter-spacing:-0.02em">Projects</h1>
     <p class="card-desc" style="margin-bottom:28px">
-      My open-source work on GitHub — fetched automatically at build time.
+      My open-source work on GitHub — fetched automatically at build time,
+      newest first.
     </p>
-    <div class="card-grid">
+    <div class="card-grid repo-grid">
       {repos.map((r) => <RepoCard repo={r} />)}
       {
         repos.length === 0 && (

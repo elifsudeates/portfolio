@@ -3,6 +3,10 @@ name: Build and Push
 on:
   push:
     branches: [main]
+  schedule:
+    # Daily rebuild so new GitHub repos show up even without a push
+    - cron: "0 6 * * *"
+  workflow_dispatch: {}
 
 jobs:
   build:

@@ -10,8 +10,10 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
 
-// All public GitHub repos
-const repos = await getRepos();
+// Top 6 most-starred public repos
+const featuredRepos = (await getRepos())
+  .sort((a, b) => b.stargazers_count - a.stargazers_count)
+  .slice(0, 6);
 
 const fmt = (d: Date) =>
   d.toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" });
@@ -45,11 +47,14 @@ const fmt = (d: Date) =>
       }
     </div>
 
-    <h2 class="section-title">Projects</h2>
-    <div class="card-grid">
-      {repos.map((r) => <RepoCard repo={r} />)}
+    <div class="section-head">
+      <h2 class="section-title">Featured Projects</h2>
+      <a href="/projects" class="section-link">View all projects →</a>
+    </div>
+    <div class="card-grid repo-grid">
+      {featuredRepos.map((r) => <RepoCard repo={r} />)}
       {
-        repos.length === 0 && (
+        featuredRepos.length === 0 && (
           <p class="card-desc">
             GitHub repos are fetched at build time (shows empty if the API
             rate limit is hit or there's no network access).
