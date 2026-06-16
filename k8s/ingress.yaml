@@ -8,10 +8,21 @@ spec:
   ingressClassName: traefik
   tls:
     - hosts:
-        - astro.cagatayuresin.com
+        - cagatayuresin.com
+        - www.cagatayuresin.com
       secretName: portfolio-tls
   rules:
-    - host: astro.cagatayuresin.com
+    - host: cagatayuresin.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: portfolio
+                port:
+                  number: 80
+    - host: www.cagatayuresin.com
       http:
         paths:
           - path: /
