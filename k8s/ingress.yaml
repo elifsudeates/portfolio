@@ -3,8 +3,7 @@ kind: Ingress
 metadata:
   name: portfolio
   annotations:
-    # cert-manager'daki ClusterIssuer adınla değiştir (örn: letsencrypt-prod)
-    cert-manager.io/cluster-issuer: <cluster-issuer-adın>
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   ingressClassName: traefik
   tls:
