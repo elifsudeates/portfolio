@@ -1,17 +1,15 @@
 ---
-title: "K3s Üzerinde ArgoCD Image Updater ile Otomatik Deployment"
-description: "GitOps akışında yeni image push edildiğinde otomatik deploy nasıl kurulur."
+title: "Automated Deployments on K3s with ArgoCD Image Updater"
+description: "How to set up automatic deploys whenever a new image is pushed in a GitOps flow."
 pubDate: 2026-06-10
 tags: ["kubernetes", "argocd", "gitops"]
 ---
 
-ArgoCD Image Updater, registry'ye yeni bir image push edildiğinde Git
-deposundaki manifest'i otomatik güncelleyerek deployment'ı tetikler. Bu yazıda
-annotation tabanlı yapılandırmayı anlatıyorum.
+ArgoCD Image Updater triggers a deployment by automatically updating the manifest in your Git repo whenever a new image is pushed to the registry. This post covers the annotation-based configuration.
 
-## Annotation Yapılandırması
+## Annotation configuration
 
-Application kaynağına aşağıdaki annotation'ları ekliyoruz:
+Add the following annotations to your Application resource:
 
 ```yaml
 metadata:
@@ -21,23 +19,18 @@ metadata:
     argocd-image-updater.argoproj.io/app.update-strategy: newest-build
 ```
 
-`write-back-method: git` sayesinde güncel image tag'i doğrudan repoya commit
-edilir; böylece ArgoCD'nin tek doğruluk kaynağı (single source of truth)
-prensibi korunur.
+With `write-back-method: git`, the new image tag gets committed straight back to the repo, preserving ArgoCD's single-source-of-truth principle.
 
-## Kustomize ile Write-Back
+## Write-back with Kustomize
 
-Kustomize kullanıyorsan `kustomization.yaml` içindeki `images` bloğu otomatik
-güncellenir:
+If you're using Kustomize, the `images` block in `kustomization.yaml` gets updated automatically:
 
 ```bash
 kubectl -n argocd logs deploy/argocd-image-updater -f
 ```
 
-Log'larda `Successfully updated image` satırını gördüğünde akış çalışıyordur.
+Once you see `Successfully updated image` in the logs, the flow is working.
 
-> İpucu: Private registry için bir pull secret tanımlamayı unutma, aksi halde
-> Image Updater tag'leri listeleyemez.
+> Tip: don't forget to set up a pull secret for private registries, or Image Updater won't be able to list tags.
 
-Bu kadar. Artık her `git push` sonrası CI image'ı build edip GHCR'a atıyor,
-Image Updater de onu cluster'a indiriyor.
+That's it. From now on, every `git push` triggers CI to build the image and push it to GHCR, and Image Updater pulls it down to the cluster.

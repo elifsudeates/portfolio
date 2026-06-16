@@ -36,16 +36,16 @@ try {
 }
 
 const fmt = (s: string) =>
-  new Date(s).toLocaleDateString("tr-TR", {
+  new Date(s).toLocaleDateString("en-US", {
     day: "numeric",
     month: "long",
     year: "numeric",
   });
 ---
 
-<Base title={`${repo.name} — Proje`} description={repo.description ?? ""}>
+<Base title={`${repo.name} — Project`} description={repo.description ?? ""}>
   <article class="container prose">
-    <a href="/projects" class="back-link">← Tüm projeler</a>
+    <a href="/projects" class="back-link">← All projects</a>
     <h1>{repo.name}</h1>
     {repo.description && <p class="card-desc">{repo.description}</p>}
 
@@ -53,15 +53,15 @@ const fmt = (s: string) =>
       {repo.language && <span>● {repo.language}</span>}
       <span>★ {repo.stargazers_count}</span>
       <span>⑂ {repo.forks_count}</span>
-      <span>Son güncelleme: {fmt(repo.pushed_at)}</span>
+      <span>Last updated: {fmt(repo.pushed_at)}</span>
     </div>
 
     <div class="meta" style="margin-bottom:8px">
-      <a href={repo.html_url} target="_blank">GitHub'da aç →</a>
+      <a href={repo.html_url} target="_blank">Open on GitHub →</a>
       {
         repo.homepage && (
           <a href={repo.homepage} target="_blank">
-            Canlı demo →
+            Live demo →
           </a>
         )
       }
@@ -71,7 +71,7 @@ const fmt = (s: string) =>
       readmeHtml ? (
         <div set:html={readmeHtml} />
       ) : (
-        <p class="card-desc">Bu repo için README bulunamadı.</p>
+        <p class="card-desc">No README found for this repo.</p>
       )
     }
   </article>

@@ -6,19 +6,20 @@ interface Props {
   description?: string;
 }
 
-const { title, description = "Backend & MLOps Engineer — portfolyo ve blog" } =
+const { title, description = "Backend & DevOps/SRE Engineer — portfolio and blog" } =
   Astro.props;
 ---
 
 <!doctype html>
-<html lang="tr">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="description" content={description} />
     <title>{title}</title>
-    <!-- Tema flash'ını önle: sayfa boyanmadan önce çalışır -->
+    <!-- Runs before paint to avoid a theme flash -->
     <script is:inline>
       const theme = localStorage.getItem("theme");
       if (
@@ -32,15 +33,18 @@ const { title, description = "Backend & MLOps Engineer — portfolyo ve blog" } 
   <body>
     <header class="site-header">
       <div class="container nav">
-        <a href="/" class="nav-brand">cagatayuresin</a>
+        <a href="/" class="nav-brand">
+          <img src="/logo.png" alt="Çağatay Üresin" class="nav-logo" />
+          cagatayuresin
+        </a>
         <nav class="nav-links">
           <a href="/blog">Blog</a>
-          <a href="/projects">Projeler</a>
+          <a href="/projects">Projects</a>
           <a href="https://github.com/cagatayuresin" target="_blank">GitHub</a>
           <button
             class="theme-toggle"
             id="theme-toggle"
-            aria-label="Temayı değiştir">🌙</button
+            aria-label="Toggle theme">🌙</button
           >
         </nav>
       </div>
@@ -52,7 +56,7 @@ const { title, description = "Backend & MLOps Engineer — portfolyo ve blog" } 
 
     <footer class="site-footer">
       <div class="container">
-        © {new Date().getFullYear()} Çağatay Üresin · Astro ile yapıldı
+        © {new Date().getFullYear()} Çağatay Üresin · Built with Astro
       </div>
     </footer>
 

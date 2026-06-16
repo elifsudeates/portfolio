@@ -6,20 +6,20 @@ import { getRepos } from "../../lib/github";
 const repos = await getRepos();
 ---
 
-<Base title="Projeler — Çağatay Üresin">
+<Base title="Projects — Çağatay Üresin">
   <section class="container" style="padding-top:48px">
-    <h1 style="letter-spacing:-0.02em">Projeler</h1>
+    <h1 style="letter-spacing:-0.02em">Projects</h1>
     <p class="card-desc" style="margin-bottom:28px">
-      GitHub'daki açık kaynak çalışmalarım — build sırasında otomatik çekilir.
+      My open-source work on GitHub — fetched automatically at build time.
     </p>
     <div class="card-grid">
       {repos.map((r) => <RepoCard repo={r} />)}
       {
         repos.length === 0 && (
           <p class="card-desc">
-            Repolar şu an çekilemedi. Yerel geliştirmede GitHub API rate limit'i
-            (saatte 60) dolmuş olabilir; CI'da GITHUB_TOKEN tanımlayınca sorun
-            kalmaz.
+            Repos couldn't be fetched right now. In local dev this can happen
+            if the GitHub API rate limit (60/hour) is hit; setting
+            GITHUB_TOKEN in CI avoids the issue.
           </p>
         )
       }

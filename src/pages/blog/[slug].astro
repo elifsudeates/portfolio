@@ -15,18 +15,18 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 
 const fmt = (d: Date) =>
-  d.toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" });
+  d.toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" });
 ---
 
 <Base title={post.data.title} description={post.data.description}>
   <article class="container prose">
-    <a href="/blog" class="back-link">← Tüm yazılar</a>
+    <a href="/blog" class="back-link">← All posts</a>
     <h1>{post.data.title}</h1>
     <div class="meta" style="margin-bottom:8px">
       <span>{fmt(post.data.pubDate)}</span>
       {post.data.tags.map((t) => <span class="tag">{t}</span>)}
     </div>
-    <!-- Markdown burada HTML'e dönüşür, kod blokları Shiki ile renklenir -->
+    <!-- Markdown renders to HTML here; code blocks are highlighted by Shiki -->
     <Content />
   </article>
 </Base>

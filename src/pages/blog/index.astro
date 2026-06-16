@@ -8,14 +8,14 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
 );
 
 const fmt = (d: Date) =>
-  d.toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" });
+  d.toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" });
 ---
 
 <Base title="Blog — Çağatay Üresin">
   <section class="container" style="padding-top:48px">
     <h1 style="letter-spacing:-0.02em">Blog</h1>
     <p class="card-desc" style="margin-bottom:28px">
-      DevOps, Kubernetes ve AI üzerine notlar.
+      Notes on DevOps, Kubernetes, and AI.
     </p>
     <div class="card-grid">
       {

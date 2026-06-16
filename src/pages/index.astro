@@ -5,29 +5,32 @@ import PostCard from "../components/PostCard.astro";
 import RepoCard from "../components/RepoCard.astro";
 import { getRepos } from "../lib/github";
 
-// Son 3 blog yazısı (draft hariç, tarihe göre)
+// Last 3 blog posts (excluding drafts), newest first
 const posts = (await getCollection("blog", ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
 
-// GitHub'dan öne çıkan 4 repo
-const repos = (await getRepos()).slice(0, 4);
+// All public GitHub repos
+const repos = await getRepos();
 
 const fmt = (d: Date) =>
-  d.toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" });
+  d.toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" });
 ---
 
-<Base title="Çağatay Üresin — Portfolyo">
+<Base title="Çağatay Üresin — Portfolio">
   <section class="container hero">
-    <h1>Merhaba, ben Çağatay 👋</h1>
+    <h1>Hi, I'm Çağatay 👋</h1>
     <p>
-      Backend Developer & SRE/DevOps. Kubernetes, GitOps ve AI üzerine yazıyor,
-      açık kaynak projeler geliştiriyorum.
+      Backend Developer & SRE/DevOps. I write about Kubernetes, GitOps, and
+      AI, and build open-source projects.
     </p>
   </section>
 
   <section class="container">
-    <h2 class="section-title">Son Yazılar</h2>
+    <div class="section-head">
+      <h2 class="section-title">Latest Posts</h2>
+      <a href="/blog" class="section-link">View all posts →</a>
+    </div>
     <div class="card-grid">
       {
         posts.map((p) => (
@@ -42,14 +45,14 @@ const fmt = (d: Date) =>
       }
     </div>
 
-    <h2 class="section-title">Öne Çıkan Projeler</h2>
+    <h2 class="section-title">Projects</h2>
     <div class="card-grid">
       {repos.map((r) => <RepoCard repo={r} />)}
       {
         repos.length === 0 && (
           <p class="card-desc">
-            GitHub repoları build sırasında çekilir (API rate limit veya ağ
-            erişimi yoksa boş görünür).
+            GitHub repos are fetched at build time (shows empty if the API
+            rate limit is hit or there's no network access).
           </p>
         )
       }

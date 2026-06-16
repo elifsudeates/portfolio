@@ -5,8 +5,8 @@
   --border: #e6e8eb;
   --text: #1a1d21;
   --text-soft: #5c636e;
-  --accent: #4f46e5;
-  --accent-soft: #eef2ff;
+  --accent: #088395;
+  --accent-soft: #ebf4f6;
   --radius: 14px;
   --maxw: 760px;
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
@@ -22,8 +22,8 @@
   --border: #21262d;
   --text: #e6edf3;
   --text-soft: #8b949e;
-  --accent: #7c83ff;
-  --accent-soft: #1c1f3a;
+  --accent: #7ab2b2;
+  --accent-soft: #0f2e35;
 }
 
 * {
@@ -73,9 +73,17 @@ a:hover {
   height: 64px;
 }
 .nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-weight: 700;
   font-size: 1.1rem;
   color: var(--text);
+}
+.nav-logo {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
 }
 .nav-links {
   display: flex;
@@ -178,6 +186,20 @@ a:hover {
   font-size: 1.4rem;
   margin: 48px 0 18px;
   letter-spacing: -0.01em;
+}
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+.section-head .section-title {
+  margin-bottom: 18px;
+}
+.section-link {
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 /* ---------- Article (Markdown render) ---------- */
