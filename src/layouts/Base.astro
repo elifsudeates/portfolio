@@ -1,0 +1,76 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Backend & MLOps Engineer — portfolyo ve blog" } =
+  Astro.props;
+---
+
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <!-- Tema flash'ını önle: sayfa boyanmadan önce çalışır -->
+    <script is:inline>
+      const theme = localStorage.getItem("theme");
+      if (
+        theme === "dark" ||
+        (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav">
+        <a href="/" class="nav-brand">cagatayuresin</a>
+        <nav class="nav-links">
+          <a href="/blog">Blog</a>
+          <a href="/projects">Projeler</a>
+          <a href="https://github.com/cagatayuresin" target="_blank">GitHub</a>
+          <button
+            class="theme-toggle"
+            id="theme-toggle"
+            aria-label="Temayı değiştir">🌙</button
+          >
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        © {new Date().getFullYear()} Çağatay Üresin · Astro ile yapıldı
+      </div>
+    </footer>
+
+    <script is:inline>
+      const btn = document.getElementById("theme-toggle");
+      const root = document.documentElement;
+      const setIcon = () => {
+        btn.textContent = root.classList.contains("dark") ? "☀️" : "🌙";
+      };
+      setIcon();
+      btn.addEventListener("click", () => {
+        root.classList.toggle("dark");
+        localStorage.setItem(
+          "theme",
+          root.classList.contains("dark") ? "dark" : "light"
+        );
+        setIcon();
+      });
+    </script>
+  </body>
+</html>

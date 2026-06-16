@@ -1,0 +1,58 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../layouts/Base.astro";
+import PostCard from "../components/PostCard.astro";
+import RepoCard from "../components/RepoCard.astro";
+import { getRepos } from "../lib/github";
+
+// Son 3 blog yazısı (draft hariç, tarihe göre)
+const posts = (await getCollection("blog", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+// GitHub'dan öne çıkan 4 repo
+const repos = (await getRepos()).slice(0, 4);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" });
+---
+
+<Base title="Çağatay Üresin — Portfolyo">
+  <section class="container hero">
+    <h1>Merhaba, ben Çağatay 👋</h1>
+    <p>
+      Backend Developer & SRE/DevOps. Kubernetes, GitOps ve AI üzerine yazıyor,
+      açık kaynak projeler geliştiriyorum.
+    </p>
+  </section>
+
+  <section class="container">
+    <h2 class="section-title">Son Yazılar</h2>
+    <div class="card-grid">
+      {
+        posts.map((p) => (
+          <PostCard
+            href={`/blog/${p.id}`}
+            title={p.data.title}
+            description={p.data.description}
+            date={fmt(p.data.pubDate)}
+            tags={p.data.tags}
+          />
+        ))
+      }
+    </div>
+
+    <h2 class="section-title">Öne Çıkan Projeler</h2>
+    <div class="card-grid">
+      {repos.map((r) => <RepoCard repo={r} />)}
+      {
+        repos.length === 0 && (
+          <p class="card-desc">
+            GitHub repoları build sırasında çekilir (API rate limit veya ağ
+            erişimi yoksa boş görünür).
+          </p>
+        )
+      }
+    </div>
+  </section>
+</Base>

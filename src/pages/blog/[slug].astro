@@ -1,0 +1,32 @@
+---
+import { getCollection, render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+
+// Her blog yazısı için /blog/<slug> sayfası üret
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" });
+---
+
+<Base title={post.data.title} description={post.data.description}>
+  <article class="container prose">
+    <a href="/blog" class="back-link">← Tüm yazılar</a>
+    <h1>{post.data.title}</h1>
+    <div class="meta" style="margin-bottom:8px">
+      <span>{fmt(post.data.pubDate)}</span>
+      {post.data.tags.map((t) => <span class="tag">{t}</span>)}
+    </div>
+    <!-- Markdown burada HTML'e dönüşür, kod blokları Shiki ile renklenir -->
+    <Content />
+  </article>
+</Base>

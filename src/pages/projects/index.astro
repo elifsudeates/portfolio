@@ -1,0 +1,28 @@
+---
+import Base from "../../layouts/Base.astro";
+import RepoCard from "../../components/RepoCard.astro";
+import { getRepos } from "../../lib/github";
+
+const repos = await getRepos();
+---
+
+<Base title="Projeler — Çağatay Üresin">
+  <section class="container" style="padding-top:48px">
+    <h1 style="letter-spacing:-0.02em">Projeler</h1>
+    <p class="card-desc" style="margin-bottom:28px">
+      GitHub'daki açık kaynak çalışmalarım — build sırasında otomatik çekilir.
+    </p>
+    <div class="card-grid">
+      {repos.map((r) => <RepoCard repo={r} />)}
+      {
+        repos.length === 0 && (
+          <p class="card-desc">
+            Repolar şu an çekilemedi. Yerel geliştirmede GitHub API rate limit'i
+            (saatte 60) dolmuş olabilir; CI'da GITHUB_TOKEN tanımlayınca sorun
+            kalmaz.
+          </p>
+        )
+      }
+    </div>
+  </section>
+</Base>

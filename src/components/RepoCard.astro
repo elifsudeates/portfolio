@@ -1,0 +1,17 @@
+---
+import type { Repo } from "../lib/github";
+interface Props {
+  repo: Repo;
+}
+const { repo } = Astro.props;
+---
+
+<a href={`/projects/${repo.name}`} class="card">
+  <h3 class="card-title">{repo.name}</h3>
+  {repo.description && <p class="card-desc">{repo.description}</p>}
+  <div class="repo-stats">
+    {repo.language && <span>● {repo.language}</span>}
+    <span>★ {repo.stargazers_count}</span>
+    <span>⑂ {repo.forks_count}</span>
+  </div>
+</a>
