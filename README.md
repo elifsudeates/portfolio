@@ -12,7 +12,7 @@ npm run dev      # http://localhost:4321
 
 ## Yeni blog yazısı ekleme
 
-`src/content/blog/` altına yeni bir `.md` dosyası oluştur:
+`src/content/blog/` altına yeni bir `.md` dosyası oluştur (dosya adı = URL slug):
 
 ```markdown
 ---
@@ -29,7 +29,11 @@ print("merhaba")
 ​```
 ```
 
-Kaydet, `git push` et — gerisi otomatik (CI build alır, ArgoCD deploy eder).
+Görsel kullanacaksan `public/blog/` altına koy, yazı içinde kökten mutlak
+path ile referans ver: `![açıklama](/blog/dosya-adi.png)`.
+
+Kaydet, `git push` et — gerisi otomatik: CI image'ı build edip GHCR'a atar,
+Keel cluster'daki Deployment'ı ~1 dakika içinde günceller.
 
 ## Projeler
 

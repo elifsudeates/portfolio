@@ -284,3 +284,58 @@ a:hover {
   color: var(--text-soft);
   font-size: 0.9rem;
 }
+
+/* ---------- CV page ---------- */
+.cv-section {
+  margin: 40px 0;
+}
+.cv-section-title {
+  font-size: 1.3rem;
+  letter-spacing: -0.01em;
+  margin: 0 0 18px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.cv-entry {
+  margin-bottom: 22px;
+}
+.cv-entry-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+}
+.cv-org {
+  font-weight: 600;
+  color: var(--text);
+  font-size: 1.02rem;
+}
+.cv-role {
+  color: var(--text-soft);
+  font-size: 0.92rem;
+  margin: 2px 0 0;
+}
+.cv-period {
+  color: var(--text-soft);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+.skill-category {
+  margin-bottom: 30px;
+}
+.skill-category h3 {
+  font-size: 1rem;
+  margin: 0 0 10px;
+  color: var(--text);
+}
+.skill-icons img {
+  max-width: 100%;
+  height: auto;
+}
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}

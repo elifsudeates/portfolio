@@ -1,0 +1,175 @@
+---
+import Base from "../layouts/Base.astro";
+
+const skillCategories = [
+  {
+    title: "DevOps & Platform Engineering",
+    icons: "kubernetes,docker,linux,nginx",
+    rest: ["Helm", "Argo CD", "Cluster Bootstrap", "Resource Limits", "Certificate Automation"],
+  },
+  {
+    title: "Infrastructure & Operations",
+    icons: "",
+    rest: [
+      "On-Premise Infrastructure",
+      "Master/Worker/Data Nodes",
+      "Preflight Checks",
+      "Systemd",
+      "Network Administration",
+      "DigitalOcean",
+    ],
+  },
+  {
+    title: "CI/CD & Automation",
+    icons: "gitlab,jenkins,bash,python,ansible,terraform,selenium",
+    rest: ["SonarQube", "Puppeteer"],
+  },
+  {
+    title: "Observability & Reliability",
+    icons: "prometheus,grafana,rabbitmq",
+    rest: ["InfluxDB", "Telegram Alerting", "Agent-Based Metrics", "Anomaly Detection"],
+  },
+  {
+    title: "Security & Runtime Visibility",
+    icons: "",
+    rest: [
+      "Harbor",
+      "Tetragon",
+      "Runtime Dependency Reporting",
+      "Image Security",
+      "SonarQube",
+      "Static Analysis",
+      "Zeek",
+      "Certificate Management",
+    ],
+  },
+  {
+    title: "Backend Engineering",
+    icons: "fastapi,django,mysql,postgres,mongodb,redis,elasticsearch",
+    rest: ["Odoo", "RESTful APIs", "gRPC", "SOAP/XML"],
+  },
+  {
+    title: "Blockchain & Distributed Systems",
+    icons: "go,java,kafka,rabbitmq",
+    rest: ["Hyperledger Fabric", "CouchDB"],
+  },
+  {
+    title: "AI & MLOps",
+    icons: "",
+    rest: [
+      "LangChain",
+      "LlamaIndex",
+      "Ollama",
+      "vLLM",
+      "OpenAI API",
+      "Anthropic API",
+      "Gemini",
+      "Hugging Face",
+      "FAISS",
+      "Qdrant",
+      "ChromaDB",
+      "Semantic Search",
+      "Intent Mapping",
+      "AI Orchestration",
+      "Prompt Engineering",
+      "Promptfoo",
+      "LLM Integration",
+      "Vector Search",
+    ],
+  },
+];
+
+const education = [
+  {
+    degree: "M.Sc. — Computer Engineering",
+    org: "Sivas Cumhuriyet University",
+    period: "2025 – Present",
+    note: "Institute of Science, Department of Computer Engineering.",
+  },
+  {
+    degree: "B.Sc. — Computer Engineering",
+    org: "Sivas Cumhuriyet University",
+    period: "2021 – 2025",
+    note: "Graduated with Honors · GPA 3.43 / 4.00.",
+  },
+  {
+    degree: "Undergraduate Study — Electronic Engineering",
+    org: "Bursa Uludağ University",
+    period: "2012 – 2021",
+  },
+];
+
+const experience = [
+  {
+    role: "DevOps / Platform Engineer & Backend Developer",
+    org: "Detaysoft",
+    period: "Nov 2021 – Present",
+    note: "Platform, DevOps, and backend responsibilities for enterprise applications running on on-premise and Turkey-hosted infrastructure.",
+  },
+  {
+    role: "Python Developer",
+    org: "Freelance",
+    period: "Jun 2016 – Nov 2021",
+    note: "Built customer-focused automation, API, and bot solutions before transitioning into full-time DevOps and platform engineering.",
+  },
+];
+---
+
+<Base title="CV — Çağatay Üresin" description="Education, experience, and skills.">
+  <section class="container" style="padding-top:48px; padding-bottom:80px">
+    <h1 style="letter-spacing:-0.02em">CV</h1>
+
+    <div class="cv-section">
+      <h2 class="cv-section-title">Experience</h2>
+      {
+        experience.map((e) => (
+          <div class="cv-entry">
+            <div class="cv-entry-head">
+              <span class="cv-org">{e.org}</span>
+              <span class="cv-period">{e.period}</span>
+            </div>
+            <p class="cv-role">{e.role}</p>
+            {e.note && <p class="card-desc">{e.note}</p>}
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="cv-section">
+      <h2 class="cv-section-title">Education</h2>
+      {
+        education.map((e) => (
+          <div class="cv-entry">
+            <div class="cv-entry-head">
+              <span class="cv-org">{e.degree}</span>
+              <span class="cv-period">{e.period}</span>
+            </div>
+            <p class="cv-role">{e.org}</p>
+            {e.note && <p class="card-desc">{e.note}</p>}
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="cv-section">
+      <h2 class="cv-section-title">Skills</h2>
+      {
+        skillCategories.map((cat) => (
+          <div class="skill-category">
+            <h3>{cat.title}</h3>
+            {cat.icons && (
+              <div class="skill-icons">
+                <img src={`https://skillicons.dev/icons?i=${cat.icons}`} alt={cat.title} loading="lazy" />
+              </div>
+            )}
+            {cat.rest.length > 0 && (
+              <div class="skill-tags">
+                {cat.rest.map((s) => <span class="tag">{s}</span>)}
+              </div>
+            )}
+          </div>
+        ))
+      }
+    </div>
+  </section>
+</Base>
