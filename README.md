@@ -1,18 +1,32 @@
 # Portfolyo — Astro + K3s
 
-Markdown ile blog yazıp GitHub repolarını otomatik gösteren statik portfolyo.
-Kod blokları Shiki ile renklendirilir. Açık/koyu tema desteği var.
+Astro ile oluşturulmuş statik portfolyo ve blog sitesi. Markdown blog
+yazıları, kapak görselleri, GitHub repolarından otomatik proje sayfaları,
+CV/yetenek grid'i, açık/koyu tema ve Shiki kod renklendirme desteği içerir.
+
+## Özellikler
+
+- `src/content/blog/` altında Markdown/MDX blog içerikleri
+- Blog kartları ve yazı detaylarında kapak görselleri
+- GitHub repolarını build sırasında çekip `/projects` altında listeleme
+- Logo + isim gösteren CV yetenek grid'i
+- Açık/koyu tema toggle'ı
+- Docker + Nginx ile statik servis
+- GitHub Actions ile GHCR image build/push
+- K3s üzerinde Traefik, cert-manager ve Keel ile otomatik yayın
 
 ## Hızlı başlangıç
 
 ```bash
 npm install
 npm run dev      # http://localhost:4321
+npm run build
 ```
 
-## Yeni blog yazısı ekleme
+## Blog yazısı ekleme
 
-`src/content/blog/` altına yeni bir `.md` dosyası oluştur (dosya adı = URL slug):
+`src/content/blog/` altına yeni bir `.md` veya `.mdx` dosyası oluştur. Dosya
+adı URL slug olur.
 
 ```markdown
 ---
@@ -20,6 +34,9 @@ title: "Başlık"
 description: "Kısa açıklama"
 pubDate: 2026-06-16
 tags: ["kubernetes", "devops"]
+cover:
+  src: "/blog/covers/yazi-kapagi.jpg"
+  alt: "Yazı kapağını açıklayan erişilebilir metin"
 ---
 
 İçerik buraya. Kod blokları otomatik renklenir:
@@ -29,106 +46,116 @@ print("merhaba")
 ​```
 ```
 
-Görsel kullanacaksan `public/blog/` altına koy, yazı içinde kökten mutlak
-path ile referans ver: `![açıklama](/blog/dosya-adi.png)`.
+Kapak görsellerini `public/blog/covers/` altına koy. Yazı içi görseller için
+`public/blog/` altında dosya tutup Markdown içinde kökten mutlak path kullan:
 
-Kaydet, `git push` et — gerisi otomatik: CI image'ı build edip GHCR'a atar,
-Keel cluster'daki Deployment'ı ~1 dakika içinde günceller.
+```markdown
+![açıklama](/blog/dosya-adi.png)
+```
+
+`draft: true` eklenen yazılar build'e ve liste sayfalarına girmez.
+
+## CV yetenekleri
+
+Yetenekler [src/pages/cv.astro](src/pages/cv.astro) içinde `skillCategories`
+listesinden yönetilir. Her yetenek logo/mark kutusu ve altında isim olarak
+gösterilir.
+
+```ts
+skill("Kubernetes", skillIcon("kubernetes"))
+skill("Helm", simpleIcon("helm"))
+skill("Certificate Automation")
+```
+
+`skillIcon()` `skillicons.dev`, `simpleIcon()` ise `simpleicons.org` CDN'ini
+kullanır. Logo bulunamazsa veya ikon servisi cevap vermezse kart otomatik
+olarak yetenek adından üretilen monogram rozete düşer.
 
 ## Projeler
 
-`/projects` sayfası GitHub repolarını **build sırasında** API'den çeker.
-`src/lib/github.ts` içindeki `USERNAME` değişkenini kendi kullanıcı adınla
-değiştir. Her repo için otomatik detay sayfası (README dahil) üretilir.
+`/projects` sayfası GitHub repolarını build sırasında API'den çeker.
+[src/lib/github.ts](src/lib/github.ts) içindeki `USERNAME` değeri hedef GitHub
+kullanıcısını belirler. Her repo için README içeriğiyle birlikte otomatik detay
+sayfası üretilir.
+
+CI build'lerinde `GITHUB_TOKEN` Docker build arg olarak geçilir; böylece GitHub
+API rate limit'i daha rahat aşılır. Ayrıca workflow her gün 06:00 UTC'de tekrar
+çalışır, bu sayede yeni GitHub repoları kod değişmeden de siteye yansır.
 
 ## Yapı
 
 ```text
+public/
+  blog/
+    covers/       -> blog kapak görselleri
 src/
-  content/blog/      → Markdown yazılar (sen buraya yazıyorsun)
+  content/blog/   -> Markdown/MDX blog yazıları
   pages/
-    index.astro      → ana sayfa
-    blog/            → blog liste + [slug] detay
-    projects/        → proje liste + [name] detay
-  layouts/Base.astro → ortak şablon (header, tema toggle, footer)
-  components/        → kart bileşenleri
-  lib/github.ts      → GitHub API'den repo çekme
-  styles/global.css  → tüm tasarım
+    index.astro   -> ana sayfa
+    blog/         -> blog liste + [slug] detay
+    projects/     -> proje liste + [name] detay
+    cv.astro      -> CV ve yetenekler
+  layouts/        -> ortak sayfa şablonu
+  components/     -> kart bileşenleri
+  lib/github.ts   -> GitHub API entegrasyonu
+  styles/         -> global tasarım
+k8s/              -> K3s Deployment, Service, Ingress manifestleri
 ```
 
-## Deployment (K3s + Keel — ArgoCD yok)
+## Deployment
 
-Akış: `git push` → GitHub Actions image'ı build edip GHCR'a atar → cluster
-içinde çalışan **Keel**, GHCR'ı periyodik kontrol edip yeni digest'i görünce
-Deployment'ı otomatik günceller. Sunucuya internetten ulaşan hiçbir şey yok
-(SSH yok, k8s API dışarı açık değil) — Keel sadece dışa doğru GHCR'a istek
-atıyor.
+Akış:
 
-### Tek seferlik kurulum (uzak k3s sunucusunda)
+```text
+git push
+  -> GitHub Actions Docker image build eder
+  -> image GHCR'a latest ve commit SHA tag'leriyle push edilir
+  -> Keel GHCR'daki latest digest değişimini poll eder
+  -> K3s Deployment otomatik güncellenir
+```
 
-1. **GHCR pull secret'ı oluştur** (repo private ise gerekli):
+Sunucuya GitHub tarafından inbound erişim gerekmez. SSH key, kubeconfig veya
+k8s API token'ı GitHub'a eklenmez; Keel cluster içinde çalışır ve dışa doğru
+GHCR'ı kontrol eder.
 
-   ```bash
-   kubectl create namespace portfolio
-   kubectl create secret docker-registry ghcr-secret \
-     --namespace portfolio \
-     --docker-server=ghcr.io \
-     --docker-username=cagatayuresin \
-     --docker-password=<GITHUB_PAT>
-   ```
+### Tek seferlik K3s kurulumu
 
-   Bu komutu sadece sunucuda elle çalıştır — `<GITHUB_PAT>` hiçbir zaman
-   git'e veya GitHub Actions secrets'a girmiyor, sadece cluster'da bir
-   Secret objesi olarak duruyor.
+Private GHCR image'ı çekmek için secret oluştur:
 
-2. **Keel'i kur** (registry'yi izleyip Deployment'ı güncelleyen operator):
+```bash
+kubectl create namespace portfolio
+kubectl create secret docker-registry ghcr-secret \
+  --namespace portfolio \
+  --docker-server=ghcr.io \
+  --docker-username=cagatayuresin \
+  --docker-password=<GITHUB_PAT>
+```
 
-   ```bash
-   helm repo add keel https://charts.keel.sh
-   helm repo update
-   helm upgrade --install keel keel/keel --namespace keel --create-namespace \
-     --set helmProvider.enabled=false
-   ```
+Keel'i kur:
 
-3. **`k8s/ingress.yaml`'i kendi cert-manager `ClusterIssuer` adınla
-   güncelle** (`<cluster-issuer-adın>` placeholder'ını değiştir, örn.
-   `letsencrypt-prod`). Domain `cagatayuresin.com` olarak ayarlı; farklıysa
-   `host` ve `tls.hosts` alanlarını güncelle.
+```bash
+helm repo add keel https://charts.keel.sh
+helm repo update
+helm upgrade --install keel keel/keel --namespace keel --create-namespace \
+  --set helmProvider.enabled=false
+```
 
-4. **Uygulamayı uygula**:
+Manifestleri uygula:
 
-   ```bash
-   kubectl apply -k k8s/
-   ```
+```bash
+kubectl apply -k k8s/
+```
 
-   Bu, `portfolio` namespace'i içine Deployment + Service + Ingress'i
-   oluşturur. `k8s/deployment.yaml` içindeki `keel.sh/*` annotation'ları
-   Keel'e bu Deployment'ı izlemesini söylüyor; private registry için
-   pod'un kendi `imagePullSecrets`'ı (yukarıda oluşturduğun `ghcr-secret`)
-   Keel tarafından otomatik kullanılır, ek bir kimlik bilgisi vermen
-   gerekmez. Ingress, k3s'in varsayılan **Traefik** controller'ı üzerinden
-   domain'e bağlanıp cert-manager ile otomatik TLS sertifikası alır.
+Ingress `cagatayuresin.com` ve `www.cagatayuresin.com` için Traefik üzerinden
+yayın yapar; TLS sertifikası `letsencrypt-prod` ClusterIssuer ile cert-manager
+tarafından alınır. Farklı domain veya issuer kullanacaksan
+[k8s/ingress.yaml](k8s/ingress.yaml) dosyasını güncelle.
 
-Bundan sonra her `git push` otomatik olarak siteye yansır — sunucuda elle
-yapman gereken hiçbir şey kalmıyor.
-
-### Şifreler/secrets nerede duruyor?
-
-- **GHCR'a image push** için kullanılan token: `secrets.GITHUB_TOKEN` —
-  GitHub Actions'ın otomatik ürettiği, repoya hiç yazılmayan, her run'da
-  yenilenen geçici bir token (`.github/workflows/build.yaml`).
-- **README/repo çekme** için aynı `GITHUB_TOKEN`, build-arg olarak image'a
-  geçiyor; bu da Actions secrets store'unda kalıyor, repoya yazılmıyor.
-- **`ghcr-secret`** (cluster'ın private image'ı çekebilmesi için): sadece
-  sunucuda `kubectl create secret` ile oluşturuluyor, hiçbir manifest'te
-  düz metin olarak yer almıyor, git'e hiç girmiyor.
-- Bu kurulumda GitHub'a **kubeconfig, SSH key veya k8s API token'ı**
-  eklemen gerekmiyor — Keel cluster içinde çalıştığı için GitHub'ın
-  sunucuna erişmesine hiç ihtiyaç yok.
-
-### Lokalde Docker testi
+## Lokalde Docker testi
 
 ```bash
 docker build -t portfolio:test .
-docker run -p 8080:80 portfolio:test   # http://localhost:8080
+docker run -p 8080:80 portfolio:test
 ```
+
+Site: `http://localhost:8080`
