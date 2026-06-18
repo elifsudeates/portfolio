@@ -335,6 +335,57 @@ button:focus-visible {
 .prose pre code {
   font-family: var(--mono);
 }
+.prose .code-block {
+  position: relative;
+  margin: 1.5em 0;
+}
+.prose .code-block pre {
+  margin: 0;
+  padding-top: 52px;
+}
+.code-copy {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--bg-card) 88%, transparent);
+  color: var(--text-soft);
+  font: inherit;
+  font-size: 0.78rem;
+  line-height: 1;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: border-color 0.15s ease, color 0.15s ease,
+    background-color 0.15s ease;
+}
+.code-copy svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+.code-copy:hover {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+}
+.code-copy.is-copied {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 52%, var(--border));
+  background: var(--accent-soft);
+}
+.code-copy.is-error {
+  color: #b42318;
+  border-color: #f2b8b5;
+}
+:root.dark .code-copy {
+  background: color-mix(in srgb, var(--bg-card) 82%, transparent);
+}
 
 /* Shiki dual-theme: dark modda koyu temayı göster */
 :root.dark .astro-code,
@@ -362,22 +413,23 @@ button:focus-visible {
   gap: 14px;
 }
 .footer-logo {
-  width: 38px;
-  height: 38px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  width: 64px;
+  height: 64px;
+  border: 0;
+  border-radius: 0;
   display: grid;
   place-items: center;
-  background: var(--bg-card);
+  background: transparent;
+  transition: transform 0.15s ease;
 }
 .footer-logo:hover {
-  border-color: var(--accent);
   text-decoration: none;
+  transform: translateY(-1px);
 }
 .footer-logo img {
-  width: 24px;
-  height: 24px;
-  border-radius: 7px;
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
 }
 :root.dark .footer-logo img {
   filter: invert(1);

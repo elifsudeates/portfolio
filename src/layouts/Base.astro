@@ -2,6 +2,8 @@
 import "../styles/global.css";
 import "@fontsource-variable/inter/wght.css";
 import Icon from "../components/Icon.astro";
+import checkIcon from "@tabler/icons/outline/check.svg?raw";
+import copyIcon from "@tabler/icons/outline/copy.svg?raw";
 
 interface Props {
   title: string;
@@ -188,6 +190,72 @@ const jsonLd =
           root.classList.contains("dark") ? "dark" : "light"
         );
       });
+    </script>
+    <script define:vars={{ checkIcon, copyIcon }}>
+      const setButtonState = (button, copied) => {
+        button.classList.toggle("is-copied", copied);
+        button.innerHTML = `${copied ? checkIcon : copyIcon}<span>${copied ? "Copied" : "Copy"}</span>`;
+        button.setAttribute("aria-label", copied ? "Code copied" : "Copy code");
+      };
+
+      const copyWithFallback = async (text) => {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          return;
+        }
+
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.setAttribute("readonly", "");
+        textArea.style.position = "fixed";
+        textArea.style.opacity = "0";
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("copy");
+        textArea.remove();
+      };
+
+      const enhanceCodeBlocks = () => {
+        document.querySelectorAll(".prose pre").forEach((pre) => {
+          if (pre.parentElement?.classList.contains("code-block")) return;
+
+          const wrapper = document.createElement("div");
+          wrapper.className = "code-block";
+          pre.parentNode.insertBefore(wrapper, pre);
+          wrapper.appendChild(pre);
+
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "code-copy";
+          setButtonState(button, false);
+
+          button.addEventListener("click", async () => {
+            const code = pre.querySelector("code");
+            const text = (code ?? pre).innerText.trimEnd();
+
+            try {
+              await copyWithFallback(text);
+              setButtonState(button, true);
+              window.setTimeout(() => setButtonState(button, false), 1600);
+            } catch {
+              button.classList.add("is-error");
+              button.querySelector("span").textContent = "Failed";
+              window.setTimeout(() => {
+                button.classList.remove("is-error");
+                setButtonState(button, false);
+              }, 1600);
+            }
+          });
+
+          wrapper.appendChild(button);
+        });
+      };
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", enhanceCodeBlocks);
+      } else {
+        enhanceCodeBlocks();
+      }
     </script>
   </body>
 </html>

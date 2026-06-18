@@ -1,66 +1,118 @@
-# Portfolyo — Astro + K3s
+# Çağatay Üresin Portfolio
 
-Astro ile oluşturulmuş statik portfolyo ve blog sitesi. Markdown blog
-yazıları, kapak görselleri, GitHub repolarından otomatik proje sayfaları,
-CV/yetenek grid'i, açık/koyu tema ve Shiki kod renklendirme desteği içerir.
+<p align="center">
+  <a href="https://cagatayuresin.com">
+    <img src="public/logo.png" alt="Çağatay Üresin portfolio logo" width="96" />
+  </a>
+</p>
 
-## Özellikler
+<p align="center">
+  <a href="https://cagatayuresin.com">
+    <img alt="Website" src="https://img.shields.io/badge/website-cagatayuresin.com-088395?style=flat-square" />
+  </a>
+  <a href="https://github.com/cagatayuresin/portfolio/actions/workflows/build.yaml">
+    <img alt="Build and Push" src="https://github.com/cagatayuresin/portfolio/actions/workflows/build.yaml/badge.svg" />
+  </a>
+  <a href="https://github.com/users/cagatayuresin/packages/container/package/portfolio">
+    <img alt="GHCR image" src="https://img.shields.io/badge/container-GHCR-088395?style=flat-square&logo=docker&logoColor=white" />
+  </a>
+  <img alt="Astro" src="https://img.shields.io/badge/Astro-static_site-BC52EE?style=flat-square&logo=astro&logoColor=white" />
+  <img alt="Kubernetes" src="https://img.shields.io/badge/deploy-K3s_%2B_Keel-326CE5?style=flat-square&logo=kubernetes&logoColor=white" />
+</p>
 
-- `src/content/blog/` altında Markdown/MDX blog içerikleri
-- Blog kartları ve yazı detaylarında kapak görselleri
-- GitHub repolarını build sırasında çekip `/projects` altında listeleme
-- Yerel Tabler SVG ikonları + isim gösteren CV yetenek grid'i
-- Türkçe karakter desteği güçlü, yerel paketlenmiş Inter Variable fontu
-- Açık/koyu tema toggle'ı
-- Docker + Nginx ile statik servis
-- GitHub Actions ile GHCR image build/push
-- K3s üzerinde Traefik, cert-manager ve Keel ile otomatik yayın
+Static portfolio and technical blog built with Astro, packaged as a Docker
+image, and deployed to K3s with automated image updates through Keel.
 
-## Hızlı başlangıç
+- Live site: [cagatayuresin.com](https://cagatayuresin.com)
+- Container package: [ghcr.io/cagatayuresin/portfolio](https://github.com/users/cagatayuresin/packages/container/package/portfolio)
+- Container image: `ghcr.io/cagatayuresin/portfolio:latest`
+
+## What It Includes
+
+- Markdown blog powered by Astro Content Collections
+- SEO-ready article pages with canonical URLs, Open Graph, Twitter cards,
+  image alt text, article metadata, JSON-LD, sitemap, and `robots.txt`
+- Blog cover images shown on the home page, blog listing, and article pages
+- Project pages generated from GitHub repositories and README content
+- Copy buttons for code blocks in blog posts and project README pages
+- CV page with local Tabler SVG skill icons and readable skill labels
+- Local Inter Variable font via `@fontsource-variable/inter`
+- Light/dark theme support with Shiki dual-theme code highlighting
+- Docker/Nginx static serving
+- GitHub Actions image build and push to GHCR
+- K3s deployment with Traefik Ingress, cert-manager TLS, and Keel polling
+
+## Stack
+
+```text
+Astro 6
+Astro Content Collections
+Marked for GitHub README rendering
+Shiki syntax highlighting
+Tabler Icons from local package files
+Inter Variable from local package files
+Docker + Nginx
+GitHub Actions + GHCR
+K3s + Traefik + cert-manager + Keel
+```
+
+## Local Development
 
 ```bash
 npm install
 npm run dev      # http://localhost:4321
 npm run build
+npm run preview
 ```
 
-## Blog yazısı ekleme
+The project expects Node.js `>=22.12.0`.
 
-`src/content/blog/` altına yeni bir `.md` veya `.mdx` dosyası oluştur. Dosya
-adı URL slug olur.
+## Blog Posts
 
-```markdown
+Add a new `.md` or `.mdx` file under `src/content/blog/`. The file name becomes
+the URL slug.
+
+~~~markdown
 ---
-title: "Başlık"
-description: "Kısa açıklama"
-pubDate: 2026-06-16
+title: "SEO-friendly post title"
+description: "A clear search and social summary under roughly 155 characters."
+pubDate: 2026-06-18
 tags: ["kubernetes", "devops"]
 cover:
-  src: "/blog/covers/yazi-kapagi.jpg"
-  alt: "Yazı kapağını açıklayan erişilebilir metin"
+  src: "/blog/covers/example-cover.jpg"
+  alt: "Accessible description of the cover image"
 ---
 
-İçerik buraya. Kod blokları otomatik renklenir:
+Post content goes here.
 
-​```python
-print("merhaba")
-​```
+```bash
+echo "Code blocks get copy buttons automatically"
 ```
+~~~
 
-Kapak görsellerini `public/blog/covers/` altına koy. Yazı içi görseller için
-`public/blog/` altında dosya tutup Markdown içinde kökten mutlak path kullan:
+Cover images live in `public/blog/covers/`. Use `draft: true` for unpublished
+posts. Future content, SEO, and cover-image standards are documented in
+[META.md](META.md).
 
-```markdown
-![açıklama](/blog/dosya-adi.png)
-```
+## Projects
 
-`draft: true` eklenen yazılar build'e ve liste sayfalarına girmez.
+The `/projects` route fetches GitHub repositories during build time. The target
+GitHub user is configured in [src/lib/github.ts](src/lib/github.ts).
 
-## CV yetenekleri
+Each project detail page is generated from repository metadata and README
+content. Code blocks inside rendered README content receive the same copy-button
+treatment as blog posts.
 
-Yetenekler [src/pages/cv.astro](src/pages/cv.astro) içinde `skillCategories`
-listesinden yönetilir. Her yetenek yerel Tabler SVG ikon kutusu ve altında
-isim olarak gösterilir; CDN ikon kaynağı kullanılmaz.
+CI passes `GITHUB_TOKEN` as a Docker build argument so GitHub API rate limits are
+less restrictive during production builds. The workflow also runs daily at
+06:00 UTC, which lets newly published repositories appear without changing the
+site code.
+
+## CV Skills and Icons
+
+CV skills are managed in [src/pages/cv.astro](src/pages/cv.astro). Each skill
+uses a local Tabler SVG icon and still renders the skill name under the icon for
+readability.
 
 ```ts
 skill("Kubernetes", "triangle-square-circle")
@@ -68,60 +120,70 @@ skill("Docker", "brand-docker")
 skill("Certificate Automation", "certificate")
 ```
 
-Kullanılabilecek ikon adları [src/components/Icon.astro](src/components/Icon.astro)
-içindeki `icons` map'inden gelir. Yeni bir ikon gerekiyorsa `@tabler/icons`
-paketindeki SVG dosyasını bu bileşene import edip map'e ekle.
+Available icon names come from the `icons` map in
+[src/components/Icon.astro](src/components/Icon.astro). Add new icons by
+importing SVG files from the local `@tabler/icons` package.
 
-## Projeler
-
-`/projects` sayfası GitHub repolarını build sırasında API'den çeker.
-[src/lib/github.ts](src/lib/github.ts) içindeki `USERNAME` değeri hedef GitHub
-kullanıcısını belirler. Her repo için README içeriğiyle birlikte otomatik detay
-sayfası üretilir.
-
-CI build'lerinde `GITHUB_TOKEN` Docker build arg olarak geçilir; böylece GitHub
-API rate limit'i daha rahat aşılır. Ayrıca workflow her gün 06:00 UTC'de tekrar
-çalışır, bu sayede yeni GitHub repoları kod değişmeden de siteye yansır.
-
-## Yapı
+## Project Structure
 
 ```text
 public/
   blog/
-    covers/       -> blog kapak görselleri
+    covers/       -> blog cover images
 src/
-  content/blog/   -> Markdown/MDX blog yazıları
+  content/blog/   -> Markdown and MDX blog posts
   pages/
-    index.astro   -> ana sayfa
-    blog/         -> blog liste + [slug] detay
-    projects/     -> proje liste + [name] detay
-    cv.astro      -> CV ve yetenekler
-  layouts/        -> ortak sayfa şablonu
-  components/     -> kart ve yerel ikon bileşenleri
-  lib/github.ts   -> GitHub API entegrasyonu
-  styles/         -> global tasarım
-k8s/              -> K3s Deployment, Service, Ingress manifestleri
+    index.astro   -> home page
+    blog/         -> blog listing and article pages
+    projects/     -> GitHub project listing and README pages
+    cv.astro      -> CV and skills page
+  layouts/        -> shared page shell and SEO metadata
+  components/     -> cards and local icon component
+  lib/github.ts   -> GitHub API integration
+  styles/         -> global design system
+k8s/              -> K3s Deployment, Service, and Ingress manifests
 ```
+
+## Container
+
+Build and test the container locally:
+
+```bash
+docker build -t portfolio:test .
+docker run -p 8080:80 portfolio:test
+```
+
+Open `http://localhost:8080`.
+
+Production images are published by GitHub Actions:
+
+```text
+ghcr.io/cagatayuresin/portfolio:latest
+ghcr.io/cagatayuresin/portfolio:<commit-sha>
+```
+
+Package page:
+[github.com/users/cagatayuresin/packages/container/package/portfolio](https://github.com/users/cagatayuresin/packages/container/package/portfolio)
 
 ## Deployment
 
-Akış:
+The production flow is intentionally simple:
 
 ```text
 git push
-  -> GitHub Actions Docker image build eder
-  -> image GHCR'a latest ve commit SHA tag'leriyle push edilir
-  -> Keel GHCR'daki latest digest değişimini poll eder
-  -> K3s Deployment otomatik güncellenir
+  -> GitHub Actions builds the Docker image
+  -> The image is pushed to GHCR as latest and commit SHA tags
+  -> Keel polls GHCR from inside the cluster
+  -> When the latest digest changes, Keel updates the K3s Deployment
 ```
 
-Sunucuya GitHub tarafından inbound erişim gerekmez. SSH key, kubeconfig veya
-k8s API token'ı GitHub'a eklenmez; Keel cluster içinde çalışır ve dışa doğru
-GHCR'ı kontrol eder.
+GitHub does not need inbound access to the server. The workflow does not require
+SSH keys, kubeconfig, or Kubernetes API tokens. Keel runs inside the cluster and
+checks GHCR outbound.
 
-### Tek seferlik K3s kurulumu
+### One-Time K3s Setup
 
-Private GHCR image'ı çekmek için secret oluştur:
+Create the namespace and image pull secret:
 
 ```bash
 kubectl create namespace portfolio
@@ -132,7 +194,7 @@ kubectl create secret docker-registry ghcr-secret \
   --docker-password=<GITHUB_PAT>
 ```
 
-Keel'i kur:
+Install Keel:
 
 ```bash
 helm repo add keel https://charts.keel.sh
@@ -141,22 +203,12 @@ helm upgrade --install keel keel/keel --namespace keel --create-namespace \
   --set helmProvider.enabled=false
 ```
 
-Manifestleri uygula:
+Apply the manifests:
 
 ```bash
 kubectl apply -k k8s/
 ```
 
-Ingress `cagatayuresin.com` ve `www.cagatayuresin.com` için Traefik üzerinden
-yayın yapar; TLS sertifikası `letsencrypt-prod` ClusterIssuer ile cert-manager
-tarafından alınır. Farklı domain veya issuer kullanacaksan
-[k8s/ingress.yaml](k8s/ingress.yaml) dosyasını güncelle.
-
-## Lokalde Docker testi
-
-```bash
-docker build -t portfolio:test .
-docker run -p 8080:80 portfolio:test
-```
-
-Site: `http://localhost:8080`
+Ingress serves `cagatayuresin.com` and `www.cagatayuresin.com` through Traefik.
+TLS certificates are issued by cert-manager with the `letsencrypt-prod`
+ClusterIssuer. For another domain or issuer, update [k8s/ingress.yaml](k8s/ingress.yaml).

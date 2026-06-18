@@ -75,6 +75,8 @@ Rules:
 - Answer the main search intent in the first 150-250 words.
 - Prefer concrete examples, YAML snippets, command snippets, and practical
   trade-offs.
+- Use normal fenced Markdown code blocks. The site automatically adds local
+  Tabler copy buttons to code blocks rendered inside `.prose` content.
 - Avoid keyword stuffing. Use natural variations of the main topic.
 - Include a conclusion that restates when the tool or technique is useful.
 - Use descriptive link text when linking externally.
