@@ -9,7 +9,8 @@ CV/yetenek grid'i, açık/koyu tema ve Shiki kod renklendirme desteği içerir.
 - `src/content/blog/` altında Markdown/MDX blog içerikleri
 - Blog kartları ve yazı detaylarında kapak görselleri
 - GitHub repolarını build sırasında çekip `/projects` altında listeleme
-- Logo + isim gösteren CV yetenek grid'i
+- Yerel Tabler SVG ikonları + isim gösteren CV yetenek grid'i
+- Türkçe karakter desteği güçlü, yerel paketlenmiş Inter Variable fontu
 - Açık/koyu tema toggle'ı
 - Docker + Nginx ile statik servis
 - GitHub Actions ile GHCR image build/push
@@ -58,18 +59,18 @@ Kapak görsellerini `public/blog/covers/` altına koy. Yazı içi görseller iç
 ## CV yetenekleri
 
 Yetenekler [src/pages/cv.astro](src/pages/cv.astro) içinde `skillCategories`
-listesinden yönetilir. Her yetenek logo/mark kutusu ve altında isim olarak
-gösterilir.
+listesinden yönetilir. Her yetenek yerel Tabler SVG ikon kutusu ve altında
+isim olarak gösterilir; CDN ikon kaynağı kullanılmaz.
 
 ```ts
-skill("Kubernetes", skillIcon("kubernetes"))
-skill("Helm", simpleIcon("helm"))
-skill("Certificate Automation")
+skill("Kubernetes", "triangle-square-circle")
+skill("Docker", "brand-docker")
+skill("Certificate Automation", "certificate")
 ```
 
-`skillIcon()` `skillicons.dev`, `simpleIcon()` ise `simpleicons.org` CDN'ini
-kullanır. Logo bulunamazsa veya ikon servisi cevap vermezse kart otomatik
-olarak yetenek adından üretilen monogram rozete düşer.
+Kullanılabilecek ikon adları [src/components/Icon.astro](src/components/Icon.astro)
+içindeki `icons` map'inden gelir. Yeni bir ikon gerekiyorsa `@tabler/icons`
+paketindeki SVG dosyasını bu bileşene import edip map'e ekle.
 
 ## Projeler
 
@@ -96,7 +97,7 @@ src/
     projects/     -> proje liste + [name] detay
     cv.astro      -> CV ve yetenekler
   layouts/        -> ortak sayfa şablonu
-  components/     -> kart bileşenleri
+  components/     -> kart ve yerel ikon bileşenleri
   lib/github.ts   -> GitHub API entegrasyonu
   styles/         -> global tasarım
 k8s/              -> K3s Deployment, Service, Ingress manifestleri

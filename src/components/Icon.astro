@@ -1,0 +1,151 @@
+---
+import article from "@tabler/icons/filled/article.svg?raw";
+import automation from "@tabler/icons/outline/automation.svg?raw";
+import api from "@tabler/icons/outline/api.svg?raw";
+import arrowMerge from "@tabler/icons/outline/arrow-merge.svg?raw";
+import bolt from "@tabler/icons/filled/bolt.svg?raw";
+import box from "@tabler/icons/outline/box.svg?raw";
+import brain from "@tabler/icons/outline/brain.svg?raw";
+import brandAnsible from "@tabler/icons/outline/brand-ansible.svg?raw";
+import brandDjango from "@tabler/icons/outline/brand-django.svg?raw";
+import brandDocker from "@tabler/icons/outline/brand-docker.svg?raw";
+import brandElastic from "@tabler/icons/outline/brand-elastic.svg?raw";
+import brandGithub from "@tabler/icons/filled/brand-github.svg?raw";
+import brandGitlab from "@tabler/icons/outline/brand-gitlab.svg?raw";
+import brandGmail from "@tabler/icons/outline/brand-gmail.svg?raw";
+import brandGolang from "@tabler/icons/outline/brand-golang.svg?raw";
+import brandGoogle from "@tabler/icons/filled/brand-google.svg?raw";
+import brandJavascript from "@tabler/icons/outline/brand-javascript.svg?raw";
+import brandLinkedin from "@tabler/icons/filled/brand-linkedin.svg?raw";
+import brandMongodb from "@tabler/icons/outline/brand-mongodb.svg?raw";
+import brandMysql from "@tabler/icons/outline/brand-mysql.svg?raw";
+import brandOpenai from "@tabler/icons/outline/brand-openai.svg?raw";
+import brandPython from "@tabler/icons/outline/brand-python.svg?raw";
+import brandRedux from "@tabler/icons/outline/brand-redux.svg?raw";
+import brandTelegram from "@tabler/icons/outline/brand-telegram.svg?raw";
+import brandTerraform from "@tabler/icons/outline/brand-terraform.svg?raw";
+import briefcase from "@tabler/icons/filled/briefcase.svg?raw";
+import bug from "@tabler/icons/filled/bug.svg?raw";
+import certificate from "@tabler/icons/outline/certificate.svg?raw";
+import chartLine from "@tabler/icons/outline/chart-line.svg?raw";
+import checklist from "@tabler/icons/outline/checklist.svg?raw";
+import cloudCode from "@tabler/icons/outline/cloud-code.svg?raw";
+import cloudDataConnection from "@tabler/icons/filled/cloud-data-connection.svg?raw";
+import code from "@tabler/icons/outline/code.svg?raw";
+import cube from "@tabler/icons/outline/cube.svg?raw";
+import database from "@tabler/icons/filled/database.svg?raw";
+import deviceAnalytics from "@tabler/icons/outline/device-analytics.svg?raw";
+import deviceDesktopCode from "@tabler/icons/outline/device-desktop-code.svg?raw";
+import fileCv from "@tabler/icons/filled/file-cv.svg?raw";
+import folders from "@tabler/icons/filled/folders.svg?raw";
+import gitBranch from "@tabler/icons/outline/git-branch.svg?raw";
+import hierarchy3 from "@tabler/icons/outline/hierarchy-3.svg?raw";
+import listCheck from "@tabler/icons/filled/list-check.svg?raw";
+import lockCode from "@tabler/icons/outline/lock-code.svg?raw";
+import mail from "@tabler/icons/filled/mail.svg?raw";
+import moon from "@tabler/icons/filled/moon.svg?raw";
+import network from "@tabler/icons/outline/network.svg?raw";
+import packageIcon from "@tabler/icons/outline/package.svg?raw";
+import robot from "@tabler/icons/outline/robot.svg?raw";
+import route from "@tabler/icons/outline/route.svg?raw";
+import school from "@tabler/icons/filled/school.svg?raw";
+import search from "@tabler/icons/filled/search.svg?raw";
+import send from "@tabler/icons/filled/send.svg?raw";
+import server from "@tabler/icons/outline/server.svg?raw";
+import serverCog from "@tabler/icons/outline/server-cog.svg?raw";
+import settings from "@tabler/icons/filled/settings.svg?raw";
+import shieldCheck from "@tabler/icons/filled/shield-check.svg?raw";
+import shieldLock from "@tabler/icons/filled/shield-lock.svg?raw";
+import sparkles from "@tabler/icons/filled/sparkles.svg?raw";
+import sun from "@tabler/icons/filled/sun.svg?raw";
+import terminal2 from "@tabler/icons/outline/terminal-2.svg?raw";
+import triangleSquareCircle from "@tabler/icons/filled/triangle-square-circle.svg?raw";
+import vector from "@tabler/icons/outline/vector.svg?raw";
+import waveSine from "@tabler/icons/outline/wave-sine.svg?raw";
+
+const icons = {
+  article,
+  automation,
+  api,
+  "arrow-merge": arrowMerge,
+  bolt,
+  box,
+  brain,
+  "brand-ansible": brandAnsible,
+  "brand-django": brandDjango,
+  "brand-docker": brandDocker,
+  "brand-elastic": brandElastic,
+  "brand-github": brandGithub,
+  "brand-gitlab": brandGitlab,
+  "brand-gmail": brandGmail,
+  "brand-golang": brandGolang,
+  "brand-google": brandGoogle,
+  "brand-javascript": brandJavascript,
+  "brand-linkedin": brandLinkedin,
+  "brand-mongodb": brandMongodb,
+  "brand-mysql": brandMysql,
+  "brand-openai": brandOpenai,
+  "brand-python": brandPython,
+  "brand-redux": brandRedux,
+  "brand-telegram": brandTelegram,
+  "brand-terraform": brandTerraform,
+  briefcase,
+  bug,
+  certificate,
+  "chart-line": chartLine,
+  checklist,
+  "cloud-code": cloudCode,
+  "cloud-data-connection": cloudDataConnection,
+  code,
+  cube,
+  database,
+  "device-analytics": deviceAnalytics,
+  "device-desktop-code": deviceDesktopCode,
+  "file-cv": fileCv,
+  folders,
+  "git-branch": gitBranch,
+  "hierarchy-3": hierarchy3,
+  "list-check": listCheck,
+  "lock-code": lockCode,
+  mail,
+  moon,
+  network,
+  package: packageIcon,
+  robot,
+  route,
+  school,
+  search,
+  send,
+  server,
+  "server-cog": serverCog,
+  settings,
+  "shield-check": shieldCheck,
+  "shield-lock": shieldLock,
+  sparkles,
+  sun,
+  "terminal-2": terminal2,
+  "triangle-square-circle": triangleSquareCircle,
+  vector,
+  "wave-sine": waveSine,
+};
+
+export type IconName = keyof typeof icons;
+
+interface Props {
+  name: IconName;
+  label?: string;
+  size?: number;
+  class?: string;
+}
+
+const { name, label, size = 20, class: className } = Astro.props;
+const svg = icons[name] ?? sparkles;
+---
+
+<span
+  class:list={["icon", className]}
+  style={`--icon-size:${size}px`}
+  aria-hidden={label ? undefined : "true"}
+  aria-label={label}
+  set:html={svg}
+/>

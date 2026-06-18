@@ -12,6 +12,8 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@fontsource-variable/inter": "^5.2.8",
+    "@tabler/icons": "^3.44.0",
     "astro": "^6.4.7",
     "marked": "^18.0.5"
   }

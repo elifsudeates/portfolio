@@ -1,9 +1,8 @@
 ---
 import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import type { IconName } from "../components/Icon.astro";
 
-const skillIcon = (slug: string) =>
-  `https://skillicons.dev/icons?i=${slug}&theme=light`;
-const simpleIcon = (slug: string) => `https://cdn.simpleicons.org/${slug}/088395`;
 const initials = (name: string) =>
   name
     .replace(/[()]/g, "")
@@ -16,11 +15,11 @@ const initials = (name: string) =>
 
 type Skill = {
   name: string;
-  icon?: string;
+  icon: IconName;
   mark?: string;
 };
 
-const skill = (name: string, icon?: string, mark?: string): Skill => ({
+const skill = (name: string, icon: IconName, mark?: string): Skill => ({
   name,
   icon,
   mark: mark ?? initials(name),
@@ -30,115 +29,115 @@ const skillCategories = [
   {
     title: "DevOps & Platform Engineering",
     skills: [
-      skill("Kubernetes", skillIcon("kubernetes")),
-      skill("Docker", skillIcon("docker")),
-      skill("Linux", skillIcon("linux")),
-      skill("Nginx", skillIcon("nginx")),
-      skill("Helm", simpleIcon("helm")),
-      skill("Argo CD", simpleIcon("argo")),
-      skill("Cluster Bootstrap"),
-      skill("Resource Limits"),
-      skill("Certificate Automation"),
+      skill("Kubernetes", "triangle-square-circle"),
+      skill("Docker", "brand-docker"),
+      skill("Linux", "terminal-2"),
+      skill("Nginx", "route"),
+      skill("Helm", "package"),
+      skill("Argo CD", "git-branch"),
+      skill("Cluster Bootstrap", "hierarchy-3"),
+      skill("Resource Limits", "device-analytics"),
+      skill("Certificate Automation", "certificate"),
     ],
   },
   {
     title: "Infrastructure & Operations",
     skills: [
-      skill("On-Premise Infrastructure"),
-      skill("Master/Worker/Data Nodes", undefined, "MW"),
-      skill("Preflight Checks"),
-      skill("Systemd", skillIcon("systemd")),
-      skill("Network Administration"),
-      skill("DigitalOcean", simpleIcon("digitalocean")),
+      skill("On-Premise Infrastructure", "server"),
+      skill("Master/Worker/Data Nodes", "cloud-data-connection", "MW"),
+      skill("Preflight Checks", "checklist"),
+      skill("Systemd", "server-cog"),
+      skill("Network Administration", "network"),
+      skill("DigitalOcean", "cloud-code"),
     ],
   },
   {
     title: "CI/CD & Automation",
     skills: [
-      skill("GitLab", skillIcon("gitlab")),
-      skill("Jenkins", skillIcon("jenkins")),
-      skill("Bash", skillIcon("bash")),
-      skill("Python", skillIcon("python")),
-      skill("Ansible", skillIcon("ansible")),
-      skill("Terraform", skillIcon("terraform")),
-      skill("Selenium", skillIcon("selenium")),
-      skill("SonarQube", skillIcon("sonarqube")),
-      skill("Puppeteer", simpleIcon("puppeteer")),
+      skill("GitLab", "brand-gitlab"),
+      skill("Jenkins", "automation"),
+      skill("Bash", "terminal-2"),
+      skill("Python", "brand-python"),
+      skill("Ansible", "brand-ansible"),
+      skill("Terraform", "brand-terraform"),
+      skill("Selenium", "search"),
+      skill("SonarQube", "bug"),
+      skill("Puppeteer", "robot"),
     ],
   },
   {
     title: "Observability & Reliability",
     skills: [
-      skill("Prometheus", skillIcon("prometheus")),
-      skill("Grafana", skillIcon("grafana")),
-      skill("RabbitMQ", skillIcon("rabbitmq")),
-      skill("InfluxDB", simpleIcon("influxdb")),
-      skill("Telegram Alerting", simpleIcon("telegram")),
-      skill("Agent-Based Metrics"),
-      skill("Anomaly Detection"),
+      skill("Prometheus", "chart-line"),
+      skill("Grafana", "device-analytics"),
+      skill("RabbitMQ", "arrow-merge"),
+      skill("InfluxDB", "database"),
+      skill("Telegram Alerting", "brand-telegram"),
+      skill("Agent-Based Metrics", "server-cog"),
+      skill("Anomaly Detection", "wave-sine"),
     ],
   },
   {
     title: "Security & Runtime Visibility",
     skills: [
-      skill("Harbor", simpleIcon("harbor")),
-      skill("Tetragon"),
-      skill("Runtime Dependency Reporting", undefined, "RD"),
-      skill("Image Security"),
-      skill("SonarQube", skillIcon("sonarqube")),
-      skill("Static Analysis"),
-      skill("Zeek"),
-      skill("Certificate Management"),
+      skill("Harbor", "shield-lock"),
+      skill("Tetragon", "shield-check"),
+      skill("Runtime Dependency Reporting", "list-check", "RD"),
+      skill("Image Security", "package"),
+      skill("SonarQube", "bug"),
+      skill("Static Analysis", "search"),
+      skill("Zeek", "network"),
+      skill("Certificate Management", "certificate"),
     ],
   },
   {
     title: "Backend Engineering",
     skills: [
-      skill("FastAPI", skillIcon("fastapi")),
-      skill("Django", skillIcon("django")),
-      skill("MySQL", skillIcon("mysql")),
-      skill("PostgreSQL", skillIcon("postgres")),
-      skill("MongoDB", skillIcon("mongodb")),
-      skill("Redis", skillIcon("redis")),
-      skill("Elasticsearch", skillIcon("elasticsearch")),
-      skill("Odoo", simpleIcon("odoo")),
-      skill("RESTful APIs", undefined, "API"),
-      skill("gRPC", skillIcon("grpc")),
-      skill("SOAP/XML", undefined, "XML"),
+      skill("FastAPI", "api"),
+      skill("Django", "brand-django"),
+      skill("MySQL", "brand-mysql"),
+      skill("PostgreSQL", "database"),
+      skill("MongoDB", "brand-mongodb"),
+      skill("Redis", "brand-redux"),
+      skill("Elasticsearch", "brand-elastic"),
+      skill("Odoo", "box"),
+      skill("RESTful APIs", "api", "API"),
+      skill("gRPC", "route"),
+      skill("SOAP/XML", "code", "XML"),
     ],
   },
   {
     title: "Blockchain & Distributed Systems",
     skills: [
-      skill("Go", skillIcon("go")),
-      skill("Java", skillIcon("java")),
-      skill("Kafka", skillIcon("kafka")),
-      skill("RabbitMQ", skillIcon("rabbitmq")),
-      skill("Hyperledger Fabric", skillIcon("hyperledger")),
-      skill("CouchDB", simpleIcon("apachecouchdb")),
+      skill("Go", "brand-golang"),
+      skill("Java", "brand-javascript"),
+      skill("Kafka", "arrow-merge"),
+      skill("RabbitMQ", "arrow-merge"),
+      skill("Hyperledger Fabric", "hierarchy-3"),
+      skill("CouchDB", "database"),
     ],
   },
   {
     title: "AI & MLOps",
     skills: [
-      skill("LangChain", simpleIcon("langchain")),
-      skill("LlamaIndex"),
-      skill("Ollama", simpleIcon("ollama")),
-      skill("vLLM", undefined, "vL"),
-      skill("OpenAI API", skillIcon("openai")),
-      skill("Anthropic API", simpleIcon("anthropic")),
-      skill("Gemini", simpleIcon("googlegemini")),
-      skill("Hugging Face", simpleIcon("huggingface")),
-      skill("FAISS"),
-      skill("Qdrant", simpleIcon("qdrant")),
-      skill("ChromaDB", undefined, "DB"),
-      skill("Semantic Search"),
-      skill("Intent Mapping"),
-      skill("AI Orchestration"),
-      skill("Prompt Engineering"),
-      skill("Promptfoo"),
-      skill("LLM Integration"),
-      skill("Vector Search"),
+      skill("LangChain", "route"),
+      skill("LlamaIndex", "list-check"),
+      skill("Ollama", "robot"),
+      skill("vLLM", "brain", "vL"),
+      skill("OpenAI API", "brand-openai"),
+      skill("Anthropic API", "brain"),
+      skill("Gemini", "brand-google"),
+      skill("Hugging Face", "sparkles", "HF"),
+      skill("FAISS", "database"),
+      skill("Qdrant", "vector"),
+      skill("ChromaDB", "database", "DB"),
+      skill("Semantic Search", "search"),
+      skill("Intent Mapping", "route"),
+      skill("AI Orchestration", "automation"),
+      skill("Prompt Engineering", "terminal-2"),
+      skill("Promptfoo", "checklist"),
+      skill("LLM Integration", "brain"),
+      skill("Vector Search", "vector"),
     ],
   },
 ];
@@ -184,39 +183,58 @@ const experience = [
     <h1 style="letter-spacing:-0.02em">CV</h1>
 
     <div class="cv-section">
-      <h2 class="cv-section-title">Experience</h2>
+      <h2 class="cv-section-title">
+        <Icon name="briefcase" />
+        Experience
+      </h2>
       {
         experience.map((e) => (
           <div class="cv-entry">
-            <div class="cv-entry-head">
-              <span class="cv-org">{e.org}</span>
-              <span class="cv-period">{e.period}</span>
+            <span class="cv-entry-icon">
+              <Icon name="briefcase" />
+            </span>
+            <div class="cv-entry-content">
+              <div class="cv-entry-head">
+                <span class="cv-org">{e.org}</span>
+                <span class="cv-period">{e.period}</span>
+              </div>
+              <p class="cv-role">{e.role}</p>
+              {e.note && <p class="card-desc">{e.note}</p>}
             </div>
-            <p class="cv-role">{e.role}</p>
-            {e.note && <p class="card-desc">{e.note}</p>}
           </div>
         ))
       }
     </div>
 
     <div class="cv-section">
-      <h2 class="cv-section-title">Education</h2>
+      <h2 class="cv-section-title">
+        <Icon name="school" />
+        Education
+      </h2>
       {
         education.map((e) => (
           <div class="cv-entry">
-            <div class="cv-entry-head">
-              <span class="cv-org">{e.degree}</span>
-              <span class="cv-period">{e.period}</span>
+            <span class="cv-entry-icon">
+              <Icon name="school" />
+            </span>
+            <div class="cv-entry-content">
+              <div class="cv-entry-head">
+                <span class="cv-org">{e.degree}</span>
+                <span class="cv-period">{e.period}</span>
+              </div>
+              <p class="cv-role">{e.org}</p>
+              {e.note && <p class="card-desc">{e.note}</p>}
             </div>
-            <p class="cv-role">{e.org}</p>
-            {e.note && <p class="card-desc">{e.note}</p>}
           </div>
         ))
       }
     </div>
 
     <div class="cv-section">
-      <h2 class="cv-section-title">Skills</h2>
+      <h2 class="cv-section-title">
+        <Icon name="sparkles" />
+        Skills
+      </h2>
       {
         skillCategories.map((cat) => (
           <div class="skill-category">
@@ -224,17 +242,9 @@ const experience = [
             <div class="skill-grid">
               {cat.skills.map((s) => (
                 <div class="skill-item">
-                  <span class:list={["skill-logo", s.icon && "has-image"]}>
+                  <span class="skill-logo">
                     <span class="skill-mark" aria-hidden="true">{s.mark}</span>
-                    {s.icon && (
-                      <img
-                        src={s.icon}
-                        alt=""
-                        loading="lazy"
-                        decoding="async"
-                        onerror="this.parentElement.classList.remove('has-image');this.hidden=true"
-                      />
-                    )}
+                    <Icon name={s.icon} size={30} />
                   </span>
                   <span class="skill-name">{s.name}</span>
                 </div>

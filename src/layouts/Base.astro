@@ -1,5 +1,7 @@
 ---
 import "../styles/global.css";
+import "@fontsource-variable/inter/wght.css";
+import Icon from "../components/Icon.astro";
 
 interface Props {
   title: string;
@@ -11,7 +13,7 @@ const { title, description = "Backend & DevOps/SRE Engineer — portfolio and bl
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="tr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -38,14 +40,19 @@ const { title, description = "Backend & DevOps/SRE Engineer — portfolio and bl
           cagatayuresin
         </a>
         <nav class="nav-links">
-          <a href="/blog">Blog</a>
-          <a href="/projects">Projects</a>
-          <a href="/cv">CV</a>
-          <a href="https://github.com/cagatayuresin" target="_blank">GitHub</a>
+          <a href="/blog"><Icon name="article" />Blog</a>
+          <a href="/projects"><Icon name="folders" />Projects</a>
+          <a href="/cv"><Icon name="file-cv" />CV</a>
+          <a href="https://github.com/cagatayuresin" target="_blank" rel="noreferrer">
+            <Icon name="brand-github" />GitHub
+          </a>
           <button
             class="theme-toggle"
             id="theme-toggle"
-            aria-label="Toggle theme">🌙</button
+            aria-label="Toggle theme">
+            <Icon name="moon" class="theme-icon theme-icon-moon" />
+            <Icon name="sun" class="theme-icon theme-icon-sun" />
+          </button
           >
         </nav>
       </div>
@@ -56,25 +63,34 @@ const { title, description = "Backend & DevOps/SRE Engineer — portfolio and bl
     </main>
 
     <footer class="site-footer">
-      <div class="container">
-        © {new Date().getFullYear()} Çağatay Üresin · Built with Astro
+      <div class="container footer-inner">
+        <a href="/" class="footer-logo" aria-label="Çağatay Üresin home">
+          <img src="/logo.png" alt="" />
+        </a>
+        <div class="footer-socials" aria-label="Social links">
+          <a href="https://www.linkedin.com/in/cagatayuresin" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+            <Icon name="brand-linkedin" />
+          </a>
+          <a href="mailto:cagatayuresin@gmail.com" aria-label="Gmail">
+            <Icon name="brand-gmail" />
+          </a>
+          <a href="https://github.com/cagatayuresin" target="_blank" rel="noreferrer" aria-label="GitHub">
+            <Icon name="brand-github" />
+          </a>
+        </div>
+        <p>© {new Date().getFullYear()} Çağatay Üresin · Built with Astro</p>
       </div>
     </footer>
 
     <script is:inline>
       const btn = document.getElementById("theme-toggle");
       const root = document.documentElement;
-      const setIcon = () => {
-        btn.textContent = root.classList.contains("dark") ? "☀️" : "🌙";
-      };
-      setIcon();
       btn.addEventListener("click", () => {
         root.classList.toggle("dark");
         localStorage.setItem(
           "theme",
           root.classList.contains("dark") ? "dark" : "light"
         );
-        setIcon();
       });
     </script>
   </body>
