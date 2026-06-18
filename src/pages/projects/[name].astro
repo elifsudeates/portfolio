@@ -43,7 +43,14 @@ const fmt = (s: string) =>
   });
 ---
 
-<Base title={`${repo.name} — Project`} description={repo.description ?? ""}>
+<Base
+  title={`${repo.name} — Project`}
+  description={
+    repo.description ??
+    `GitHub project page for ${repo.name} by Çağatay Üresin.`
+  }
+  canonicalPath={`/projects/${repo.name}`}
+>
   <article class="container prose">
     <a href="/projects" class="back-link">← All projects</a>
     <h1>{repo.name}</h1>

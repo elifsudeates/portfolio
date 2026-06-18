@@ -39,8 +39,6 @@ coverage/
 # jetbrains setting folder
 .idea/
 
-# Claude Code local settings (kişisel, paylaşılmaz)
-.claude/settings.local.json
-
-# editor settings
+# local assistant/editor settings
+.claude/
 .vscode/
