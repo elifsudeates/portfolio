@@ -3,6 +3,9 @@ title: "Automated Deployments on K3s with ArgoCD Image Updater"
 description: "How to set up automatic deploys whenever a new image is pushed in a GitOps flow."
 pubDate: 2026-06-10
 tags: ["kubernetes", "argocd", "gitops"]
+cover:
+  src: "/blog/covers/argocd-image-updater-cover.jpg"
+  alt: "Abstract GitOps deployment pipeline from container registry to Kubernetes cluster"
 ---
 
 ArgoCD Image Updater triggers a deployment by automatically updating the manifest in your Git repo whenever a new image is pushed to the registry. This post covers the annotation-based configuration.

@@ -3,6 +3,9 @@ title: "Observer Lite: Self-Host It, Watch Everything"
 description: "An open-source, self-hosted uptime monitor in a single Docker image."
 pubDate: 2026-05-06
 tags: ["self-hosted", "fastapi", "python", "monitoring"]
+cover:
+  src: "/blog/covers/observer-lite-cover.jpg"
+  alt: "Self-hosted monitoring dashboard with uptime charts, server status, and security shield"
 ---
 
 While working as both a DevOps engineer and an SRE in production environments, I kept running into the same gap: most uptime monitoring tools on the market are either expensive, dependent on an external database, or far more complicated to set up than they need to be. To close that gap I built **Observer Lite** — a self-hosted uptime monitor.

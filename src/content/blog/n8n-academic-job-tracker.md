@@ -3,6 +3,9 @@ title: "n8n Academic Job Tracker: Automating ilan.gov.tr"
 description: "An open-source n8n workflow that scans ilan.gov.tr hourly for research and faculty positions and notifies you via Telegram and email."
 pubDate: 2026-04-02
 tags: ["n8n", "automation", "self-hosted"]
+cover:
+  src: "/blog/covers/n8n-academic-job-tracker-cover.jpg"
+  alt: "Workflow automation graph scanning academic job postings and sending notifications"
 ---
 
 The **n8n academic job tracker** scans ilan.gov.tr hourly for Research Assistant, Faculty Member, and Specialist postings, sending notifications over Telegram and email. Over the last two years n8n has rapidly stood out in the workflow-automation space — mainly because it can run self-hosted, takes data privacy seriously, and lets you drop into JavaScript directly when you need to. This post walks through setting up and using this open-source workflow step by step.

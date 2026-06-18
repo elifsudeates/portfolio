@@ -1,5 +1,6 @@
 # build output
 dist/
+
 # generated types
 .astro/
 
@@ -11,18 +12,35 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-
+lerna-debug.log*
 
 # environment variables
 .env
-.env.production
+.env.*
+!.env.example
+
+# test and tool caches
+coverage/
+.cache/
+.turbo/
+.vite/
+*.tsbuildinfo
+.eslintcache
+.stylelintcache
+
+# deploy platforms
+.vercel/
+.netlify/
 
 # macOS-specific files
 .DS_Store
+._*
 
 # jetbrains setting folder
 .idea/
 
 # Claude Code local settings (kişisel, paylaşılmaz)
 .claude/settings.local.json
-.vscode
+
+# editor settings
+.vscode/

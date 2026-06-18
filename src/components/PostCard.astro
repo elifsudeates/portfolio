@@ -5,21 +5,34 @@ interface Props {
   description?: string | null;
   date?: string;
   tags?: string[];
+  cover?: {
+    src: string;
+    alt: string;
+  } | null;
 }
-const { href, title, description, date, tags = [] } = Astro.props;
+const { href, title, description, date, tags = [], cover = null } = Astro.props;
 ---
 
-<a href={href} class="card">
-  <h3 class="card-title">{title}</h3>
-  {description && <p class="card-desc">{description}</p>}
+<a href={href} class="card post-card">
   {
-    (date || tags.length > 0) && (
-      <div class="meta" style="margin-top:12px">
-        {date && <span>{date}</span>}
-        {tags.map((t) => (
-          <span class="tag">{t}</span>
-        ))}
+    cover && (
+      <div class="post-card-cover">
+        <img src={cover.src} alt={cover.alt} loading="lazy" decoding="async" />
       </div>
     )
   }
+  <div class="post-card-body">
+    <h3 class="card-title">{title}</h3>
+    {description && <p class="card-desc">{description}</p>}
+    {
+      (date || tags.length > 0) && (
+        <div class="meta">
+          {date && <span>{date}</span>}
+          {tags.map((t) => (
+            <span class="tag">{t}</span>
+          ))}
+        </div>
+      )
+    }
+  </div>
 </a>

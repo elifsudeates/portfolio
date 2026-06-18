@@ -3,6 +3,9 @@ title: "Production WordPress on K3s"
 description: "A production-ready Helm chart for WordPress on K3s with fully automated SSL and a scalable architecture — how and why."
 pubDate: 2026-01-19
 tags: ["kubernetes", "k3s", "helm", "wordpress"]
+cover:
+  src: "/blog/covers/k3s-production-wordpress-cover.jpg"
+  alt: "Production web architecture on a compact Kubernetes cluster with SSL and storage components"
 ---
 
 A production-ready WordPress setup on K3s, with a Helm chart for fully automated SSL and a scalable architecture. How, and why?

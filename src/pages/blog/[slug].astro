@@ -26,6 +26,17 @@ const fmt = (d: Date) =>
       <span>{fmt(post.data.pubDate)}</span>
       {post.data.tags.map((t) => <span class="tag">{t}</span>)}
     </div>
+    {
+      post.data.cover && (
+        <img
+          src={post.data.cover.src}
+          alt={post.data.cover.alt}
+          class="post-cover"
+          loading="eager"
+          decoding="async"
+        />
+      )
+    }
     <!-- Markdown renders to HTML here; code blocks are highlighted by Shiki -->
     <Content />
   </article>
