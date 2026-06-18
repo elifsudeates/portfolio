@@ -2,7 +2,10 @@
 
 <p align="center">
   <a href="https://cagatayuresin.com">
-    <img src="public/logo.png" alt="Çağatay Üresin portfolio logo" width="96" />
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="public/logo-readme-dark.png" />
+      <img src="public/logo.png" alt="Çağatay Üresin portfolio logo" width="96" />
+    </picture>
   </a>
 </p>
 
