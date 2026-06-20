@@ -25,10 +25,10 @@ interface Props {
 
 const {
   title,
-  description = "Backend and DevOps portfolio by Çağatay Üresin, covering Kubernetes, GitOps, AI integrations, and open-source engineering projects.",
+  description = "Backend and DevOps portfolio by Elif Sude Ateş, covering Kubernetes, GitOps, AI integrations, and open-source engineering projects.",
   image = {
     src: "/logo.png",
-    alt: "Çağatay Üresin portfolio logo",
+    alt: "Elif Sude Ateş portfolio logo",
     width: 300,
     height: 300,
   },
@@ -41,23 +41,23 @@ const {
   locale = "en_US",
 } = Astro.props;
 
-const site = Astro.site ?? new URL("https://cagatayuresin.com");
+const site = Astro.site ?? new URL("https://elifsudeates.com");
 const normalizedCanonicalPath =
   canonicalPath === "/" || canonicalPath.endsWith("/")
     ? canonicalPath
     : `${canonicalPath}/`;
 const canonicalUrl = new URL(normalizedCanonicalPath, site);
 const imageUrl = new URL(image.src, site);
-const pageTitle = title.includes("Çağatay Üresin")
+const pageTitle = title.includes("Elif Sude Ateş")
   ? title
-  : `${title} — Çağatay Üresin`;
+  : `${title} — Elif Sude Ateş`;
 const author = {
   "@type": "Person",
-  name: "Çağatay Üresin",
+  name: "Elif Sude Ateş",
   url: new URL("/", site).toString(),
   sameAs: [
-    "https://github.com/cagatayuresin",
-    "https://www.linkedin.com/in/cagatayuresin",
+    "https://github.com/elifsudeates",
+    "https://www.linkedin.com/in/elifsudeates",
   ],
 };
 const jsonLd =
@@ -95,10 +95,10 @@ const jsonLd =
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="canonical" href={canonicalUrl.toString()} />
     <meta name="description" content={description} />
-    <meta name="author" content="Çağatay Üresin" />
+    <meta name="author" content="Elif Sude Ateş" />
     {tags.length > 0 && <meta name="keywords" content={tags.join(", ")} />}
     <meta name="robots" content="index, follow" />
-    <meta property="og:site_name" content="Çağatay Üresin" />
+    <meta property="og:site_name" content="Elif Sude Ateş" />
     <meta property="og:locale" content={locale} />
     <meta property="og:type" content={type} />
     <meta property="og:title" content={pageTitle} />
@@ -134,14 +134,14 @@ const jsonLd =
     <header class="site-header">
       <div class="container nav">
         <a href="/" class="nav-brand">
-          <img src="/logo.png" alt="Çağatay Üresin" class="nav-logo" />
-          cagatayuresin
+          <img src="/logo.png" alt="Elif Sude Ateş" class="nav-logo" />
+          elifsudeates
         </a>
         <nav class="nav-links">
           <a href="/blog"><Icon name="article" />Blog</a>
-          <a href="/projects"><Icon name="folders" />Projects</a>
+          <a href="/projects"><Icon name="folders" />Projeler</a>
           <a href="/cv"><Icon name="file-cv" />CV</a>
-          <a href="https://github.com/cagatayuresin" target="_blank" rel="noreferrer">
+          <a href="https://github.com/elifsudeates" target="_blank" rel="noreferrer">
             <Icon name="brand-github" />GitHub
           </a>
           <button
@@ -162,21 +162,21 @@ const jsonLd =
 
     <footer class="site-footer">
       <div class="container footer-inner">
-        <a href="/" class="footer-logo" aria-label="Çağatay Üresin home">
+        <a href="/" class="footer-logo" aria-label="Elif Sude Ateş home">
           <img src="/logo.png" alt="" />
         </a>
         <div class="footer-socials" aria-label="Social links">
-          <a href="https://www.linkedin.com/in/cagatayuresin" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+          <a href="https://www.linkedin.com/in/elifsudeates" target="_blank" rel="noreferrer" aria-label="LinkedIn">
             <Icon name="brand-linkedin" />
           </a>
-          <a href="mailto:cagatayuresin@gmail.com" aria-label="Gmail">
+          <a href="mailto:atesudelif@gmail.com" aria-label="Gmail">
             <Icon name="brand-gmail" />
           </a>
-          <a href="https://github.com/cagatayuresin" target="_blank" rel="noreferrer" aria-label="GitHub">
+          <a href="https://github.com/elifsudeates" target="_blank" rel="noreferrer" aria-label="GitHub">
             <Icon name="brand-github" />
           </a>
         </div>
-        <p>© {new Date().getFullYear()} Çağatay Üresin · Built with Astro</p>
+        <p>© {new Date().getFullYear()} Elif Sude Ateş · Astro ile geliştirildi</p>
       </div>
     </footer>
 
@@ -194,8 +194,8 @@ const jsonLd =
     <script define:vars={{ checkIcon, copyIcon }}>
       const setButtonState = (button, copied) => {
         button.classList.toggle("is-copied", copied);
-        button.innerHTML = `${copied ? checkIcon : copyIcon}<span>${copied ? "Copied" : "Copy"}</span>`;
-        button.setAttribute("aria-label", copied ? "Code copied" : "Copy code");
+        button.innerHTML = `${copied ? checkIcon : copyIcon}<span>${copied ? "Kopyalandı" : "Kopyala"}</span>`;
+        button.setAttribute("aria-label", copied ? "Kod kopyalandı" : "Kodu kopyala");
       };
 
       const copyWithFallback = async (text) => {
@@ -239,7 +239,7 @@ const jsonLd =
               window.setTimeout(() => setButtonState(button, false), 1600);
             } catch {
               button.classList.add("is-error");
-              button.querySelector("span").textContent = "Failed";
+              button.querySelector("span").textContent = "Başarısız";
               window.setTimeout(() => {
                 button.classList.remove("is-error");
                 setButtonState(button, false);

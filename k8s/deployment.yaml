@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: portfolio
-          image: ghcr.io/cagatayuresin/portfolio:latest
+          image: ghcr.io/elifsudeates/portfolio:latest
           ports:
             - containerPort: 80
           resources:
@@ -35,7 +35,7 @@ spec:
               memory: 64Mi
       # GHCR private ise bu secret'ı oluştur:
       # kubectl create secret docker-registry ghcr-secret \
-      #   --docker-server=ghcr.io --docker-username=cagatayuresin \
+      #   --docker-server=ghcr.io --docker-username=elifsudeates \
       #   --docker-password=<GITHUB_PAT>
       imagePullSecrets:
         - name: ghcr-secret

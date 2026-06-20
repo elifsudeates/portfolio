@@ -31,5 +31,5 @@ jobs:
           build-args: |
             GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
           tags: |
-            ghcr.io/cagatayuresin/portfolio:latest
-            ghcr.io/cagatayuresin/portfolio:${{ github.sha }}
+            ghcr.io/elifsudeates/portfolio:latest
+            ghcr.io/elifsudeates/portfolio:${{ github.sha }}

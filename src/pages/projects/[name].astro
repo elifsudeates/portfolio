@@ -24,7 +24,7 @@ try {
   if (token) headers.Authorization = `Bearer ${token}`;
 
   const res = await fetch(
-    `https://api.github.com/repos/cagatayuresin/${repo.name}/readme`,
+    `https://api.github.com/repos/elifsudeates/${repo.name}/readme`,
     { headers }
   );
   if (res.ok) {
@@ -47,7 +47,7 @@ const fmt = (s: string) =>
   title={`${repo.name} — Project`}
   description={
     repo.description ??
-    `GitHub project page for ${repo.name} by Çağatay Üresin.`
+    `GitHub project page for ${repo.name} by Elif Sude Ateş.`
   }
   canonicalPath={`/projects/${repo.name}`}
 >

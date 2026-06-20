@@ -7,24 +7,21 @@ const repos = await getRepos();
 ---
 
 <Base
-  title="Projects — Çağatay Üresin"
-  description="Open-source projects by Çağatay Üresin, automatically generated from GitHub repositories with README-backed project pages."
+  title="Projeler — Elif Sude Ateş"
+  description="Elif Sude Ateş'in GitHub repolarından otomatik olarak oluşturulan açık kaynaklı projeleri."
   canonicalPath="/projects"
 >
   <section class="container container-wide" style="padding-top:48px">
-    <h1 style="letter-spacing:-0.02em">Projects</h1>
+    <h1 style="letter-spacing:-0.02em">Projeler</h1>
     <p class="card-desc" style="margin-bottom:28px">
-      My open-source work on GitHub — fetched automatically at build time,
-      newest first.
+      GitHub üzerindeki açık kaynak çalışmalarım — derleme sırasında otomatik olarak en yenisi en üstte olacak şekilde çekilir.
     </p>
     <div class="card-grid repo-grid">
       {repos.map((r) => <RepoCard repo={r} />)}
       {
         repos.length === 0 && (
           <p class="card-desc">
-            Repos couldn't be fetched right now. In local dev this can happen
-            if the GitHub API rate limit (60/hour) is hit; setting
-            GITHUB_TOKEN in CI avoids the issue.
+            Projeler şu anda çekilemedi. Yerel geliştirmede GitHub API limiti (saatte 60 istek) dolmuş olabilir. CI ortamında GITHUB_TOKEN kullanılarak bu sorun önlenir.
           </p>
         )
       }

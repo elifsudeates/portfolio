@@ -16,29 +16,26 @@ const featuredRepos = (await getRepos())
   .slice(0, 6);
 
 const fmt = (d: Date) =>
-  d.toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" });
+  d.toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" });
 ---
 
 <Base
-  title="Çağatay Üresin — Portfolio"
-  description="Portfolio and technical blog of Çağatay Üresin, focused on Kubernetes, GitOps, DevOps, backend systems, AI integrations, and open-source projects."
+  title="Elif Sude Ateş — Portfolio"
+  description="Elif Sude Ateş'in portfolyosu ve teknik blogu. Siber güvenlik, makine öğrenmesi, Kubernetes ve açık kaynak projeler üzerine çalışmalar."
   canonicalPath="/"
 >
   <section class="container hero">
-    <h1>Hi, I'm Çağatay 👋</h1>
+    <h1>Merhaba, Ben Elif 👋</h1>
     <p>
-      AI Integration & Deployment Engineer focused on production LLM-backed
-      backend integrations, semantic search, and Kubernetes-based deployment.
-      Strong backend foundation in Python, Go, and Java. I write about
-      Kubernetes, GitOps, and AI, and build open-source projects.
+      Siber Güvenlik, Makine Öğrenmesi, Kubernetes ve AI entegrasyonlarına odaklanan bir geliştiriciyim. Yeni teknolojileri denemeyi, projeler geliştirmeyi ve bunları paylaşmayı seviyorum. Python, Go ve Java dillerinde tecrübem bulunuyor.
     </p>
-    <a href="/cv" class="section-link">View full CV →</a>
+    <a href="/cv" class="section-link">Tüm özgeçmişimi görüntüle →</a>
   </section>
 
   <section class="container">
     <div class="section-head">
-      <h2 class="section-title">Latest Posts</h2>
-      <a href="/blog" class="section-link">View all posts →</a>
+      <h2 class="section-title">Son Yazılar</h2>
+      <a href="/blog" class="section-link">Tüm yazıları görüntüle →</a>
     </div>
     <div class="card-grid">
       {
@@ -56,16 +53,15 @@ const fmt = (d: Date) =>
     </div>
 
     <div class="section-head">
-      <h2 class="section-title">Featured Projects</h2>
-      <a href="/projects" class="section-link">View all projects →</a>
+      <h2 class="section-title">Öne Çıkan Projeler</h2>
+      <a href="/projects" class="section-link">Tüm projeleri görüntüle →</a>
     </div>
     <div class="card-grid repo-grid">
       {featuredRepos.map((r) => <RepoCard repo={r} />)}
       {
         featuredRepos.length === 0 && (
           <p class="card-desc">
-            GitHub repos are fetched at build time (shows empty if the API
-            rate limit is hit or there's no network access).
+            GitHub projeleri derleme sırasında çekilir (API limiti dolduğunda veya ağ bağlantısı olmadığında boş görünür).
           </p>
         )
       }

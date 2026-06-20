@@ -1,22 +1,22 @@
-# Çağatay Üresin Portfolio
+# Elif Sude Ateş Portfolio
 
 <p align="center">
-  <a href="https://cagatayuresin.com">
+  <a href="https://elifsudeates.com">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="public/logo-readme-dark.png" />
-      <img src="public/logo.png" alt="Çağatay Üresin portfolio logo" width="96" />
+      <img src="public/logo.png" alt="Elif Sude Ateş portfolio logo" width="96" />
     </picture>
   </a>
 </p>
 
 <p align="center">
-  <a href="https://cagatayuresin.com">
-    <img alt="Website" src="https://img.shields.io/badge/website-cagatayuresin.com-088395?style=flat-square" />
+  <a href="https://elifsudeates.com">
+    <img alt="Website" src="https://img.shields.io/badge/website-elifsudeates.com-088395?style=flat-square" />
   </a>
-  <a href="https://github.com/cagatayuresin/portfolio/actions/workflows/build.yaml">
-    <img alt="Build and Push" src="https://github.com/cagatayuresin/portfolio/actions/workflows/build.yaml/badge.svg" />
+  <a href="https://github.com/elifsudeates/portfolio/actions/workflows/build.yaml">
+    <img alt="Build and Push" src="https://github.com/elifsudeates/portfolio/actions/workflows/build.yaml/badge.svg" />
   </a>
-  <a href="https://github.com/users/cagatayuresin/packages/container/package/portfolio">
+  <a href="https://github.com/users/elifsudeates/packages/container/package/portfolio">
     <img alt="GHCR image" src="https://img.shields.io/badge/container-GHCR-088395?style=flat-square&logo=docker&logoColor=white" />
   </a>
   <img alt="Astro" src="https://img.shields.io/badge/Astro-static_site-BC52EE?style=flat-square&logo=astro&logoColor=white" />
@@ -26,9 +26,9 @@
 Static portfolio and technical blog built with Astro, packaged as a Docker
 image, and deployed to K3s with automated image updates through Keel.
 
-- Live site: [cagatayuresin.com](https://cagatayuresin.com)
-- Container package: [ghcr.io/cagatayuresin/portfolio](https://github.com/users/cagatayuresin/packages/container/package/portfolio)
-- Container image: `ghcr.io/cagatayuresin/portfolio:latest`
+- Live site: [elifsudeates.com](https://elifsudeates.com)
+- Container package: [ghcr.io/elifsudeates/portfolio](https://github.com/users/elifsudeates/packages/container/package/portfolio)
+- Container image: `ghcr.io/elifsudeates/portfolio:latest`
 
 ## What It Includes
 
@@ -161,12 +161,12 @@ Open `http://localhost:8080`.
 Production images are published by GitHub Actions:
 
 ```text
-ghcr.io/cagatayuresin/portfolio:latest
-ghcr.io/cagatayuresin/portfolio:<commit-sha>
+ghcr.io/elifsudeates/portfolio:latest
+ghcr.io/elifsudeates/portfolio:<commit-sha>
 ```
 
 Package page:
-[github.com/users/cagatayuresin/packages/container/package/portfolio](https://github.com/users/cagatayuresin/packages/container/package/portfolio)
+[github.com/users/elifsudeates/packages/container/package/portfolio](https://github.com/users/elifsudeates/packages/container/package/portfolio)
 
 ## Deployment
 
@@ -193,7 +193,7 @@ kubectl create namespace portfolio
 kubectl create secret docker-registry ghcr-secret \
   --namespace portfolio \
   --docker-server=ghcr.io \
-  --docker-username=cagatayuresin \
+  --docker-username=elifsudeates \
   --docker-password=<GITHUB_PAT>
 ```
 
@@ -212,6 +212,6 @@ Apply the manifests:
 kubectl apply -k k8s/
 ```
 
-Ingress serves `cagatayuresin.com` and `www.cagatayuresin.com` through Traefik.
+Ingress serves `elifsudeates.com` and `www.elifsudeates.com` through Traefik.
 TLS certificates are issued by cert-manager with the `letsencrypt-prod`
 ClusterIssuer. For another domain or issuer, update [k8s/ingress.yaml](k8s/ingress.yaml).

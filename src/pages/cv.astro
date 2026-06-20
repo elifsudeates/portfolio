@@ -25,162 +25,14 @@ const skill = (name: string, icon: IconName, mark?: string): Skill => ({
   mark: mark ?? initials(name),
 });
 
-const skillCategories = [
-  {
-    title: "DevOps & Platform Engineering",
-    skills: [
-      skill("Kubernetes", "triangle-square-circle"),
-      skill("Docker", "brand-docker"),
-      skill("Linux", "terminal-2"),
-      skill("Nginx", "route"),
-      skill("Helm", "package"),
-      skill("Argo CD", "git-branch"),
-      skill("Cluster Bootstrap", "hierarchy-3"),
-      skill("Resource Limits", "device-analytics"),
-      skill("Certificate Automation", "certificate"),
-    ],
-  },
-  {
-    title: "Infrastructure & Operations",
-    skills: [
-      skill("On-Premise Infrastructure", "server"),
-      skill("Master/Worker/Data Nodes", "cloud-data-connection", "MW"),
-      skill("Preflight Checks", "checklist"),
-      skill("Systemd", "server-cog"),
-      skill("Network Administration", "network"),
-      skill("DigitalOcean", "cloud-code"),
-    ],
-  },
-  {
-    title: "CI/CD & Automation",
-    skills: [
-      skill("GitLab", "brand-gitlab"),
-      skill("Jenkins", "automation"),
-      skill("Bash", "terminal-2"),
-      skill("Python", "brand-python"),
-      skill("Ansible", "brand-ansible"),
-      skill("Terraform", "brand-terraform"),
-      skill("Selenium", "search"),
-      skill("SonarQube", "bug"),
-      skill("Puppeteer", "robot"),
-    ],
-  },
-  {
-    title: "Observability & Reliability",
-    skills: [
-      skill("Prometheus", "chart-line"),
-      skill("Grafana", "device-analytics"),
-      skill("RabbitMQ", "arrow-merge"),
-      skill("InfluxDB", "database"),
-      skill("Telegram Alerting", "brand-telegram"),
-      skill("Agent-Based Metrics", "server-cog"),
-      skill("Anomaly Detection", "wave-sine"),
-    ],
-  },
-  {
-    title: "Security & Runtime Visibility",
-    skills: [
-      skill("Harbor", "shield-lock"),
-      skill("Tetragon", "shield-check"),
-      skill("Runtime Dependency Reporting", "list-check", "RD"),
-      skill("Image Security", "package"),
-      skill("SonarQube", "bug"),
-      skill("Static Analysis", "search"),
-      skill("Zeek", "network"),
-      skill("Certificate Management", "certificate"),
-    ],
-  },
-  {
-    title: "Backend Engineering",
-    skills: [
-      skill("FastAPI", "api"),
-      skill("Django", "brand-django"),
-      skill("MySQL", "brand-mysql"),
-      skill("PostgreSQL", "database"),
-      skill("MongoDB", "brand-mongodb"),
-      skill("Redis", "brand-redux"),
-      skill("Elasticsearch", "brand-elastic"),
-      skill("Odoo", "box"),
-      skill("RESTful APIs", "api", "API"),
-      skill("gRPC", "route"),
-      skill("SOAP/XML", "code", "XML"),
-    ],
-  },
-  {
-    title: "Blockchain & Distributed Systems",
-    skills: [
-      skill("Go", "brand-golang"),
-      skill("Java", "brand-javascript"),
-      skill("Kafka", "arrow-merge"),
-      skill("RabbitMQ", "arrow-merge"),
-      skill("Hyperledger Fabric", "hierarchy-3"),
-      skill("CouchDB", "database"),
-    ],
-  },
-  {
-    title: "AI & MLOps",
-    skills: [
-      skill("LangChain", "route"),
-      skill("LlamaIndex", "list-check"),
-      skill("Ollama", "robot"),
-      skill("vLLM", "brain", "vL"),
-      skill("OpenAI API", "brand-openai"),
-      skill("Anthropic API", "brain"),
-      skill("Gemini", "brand-google"),
-      skill("Hugging Face", "sparkles", "HF"),
-      skill("FAISS", "database"),
-      skill("Qdrant", "vector"),
-      skill("ChromaDB", "database", "DB"),
-      skill("Semantic Search", "search"),
-      skill("Intent Mapping", "route"),
-      skill("AI Orchestration", "automation"),
-      skill("Prompt Engineering", "terminal-2"),
-      skill("Promptfoo", "checklist"),
-      skill("LLM Integration", "brain"),
-      skill("Vector Search", "vector"),
-    ],
-  },
-];
-
-const education = [
-  {
-    degree: "M.Sc. — Computer Engineering",
-    org: "Sivas Cumhuriyet University",
-    period: "2025 – Present",
-    note: "Institute of Science, Department of Computer Engineering.",
-  },
-  {
-    degree: "B.Sc. — Computer Engineering",
-    org: "Sivas Cumhuriyet University",
-    period: "2021 – 2025",
-    note: "Graduated with Honors · GPA 3.43 / 4.00.",
-  },
-  {
-    degree: "Undergraduate Study — Electronic Engineering",
-    org: "Bursa Uludağ University",
-    period: "2012 – 2021",
-  },
-];
-
-const experience = [
-  {
-    role: "DevOps / Platform Engineer & Backend Developer",
-    org: "Detaysoft",
-    period: "Nov 2021 – Present",
-    note: "Platform, DevOps, and backend responsibilities for enterprise applications running on on-premise and Turkey-hosted infrastructure.",
-  },
-  {
-    role: "Python Developer",
-    org: "Freelance",
-    period: "Jun 2016 – Nov 2021",
-    note: "Built customer-focused automation, API, and bot solutions before transitioning into full-time DevOps and platform engineering.",
-  },
-];
+const skillCategories = [];
+const education = [];
+const experience = [];
 ---
 
 <Base
-  title="CV — Çağatay Üresin"
-  description="Education, professional experience, DevOps skills, platform engineering background, backend expertise, and AI integration work by Çağatay Üresin."
+  title="CV — Elif Sude Ateş"
+  description="Elif Sude Ateş'in eğitimi, profesyonel deneyimi ve yetenekleri."
   canonicalPath="/cv"
 >
   <section class="container" style="padding-top:48px; padding-bottom:80px">
@@ -189,7 +41,7 @@ const experience = [
     <div class="cv-section">
       <h2 class="cv-section-title">
         <Icon name="briefcase" />
-        Experience
+        Deneyim
       </h2>
       {
         experience.map((e) => (
@@ -213,7 +65,7 @@ const experience = [
     <div class="cv-section">
       <h2 class="cv-section-title">
         <Icon name="school" />
-        Education
+        Eğitim
       </h2>
       {
         education.map((e) => (
@@ -237,7 +89,7 @@ const experience = [
     <div class="cv-section">
       <h2 class="cv-section-title">
         <Icon name="sparkles" />
-        Skills
+        Yetenekler
       </h2>
       {
         skillCategories.map((cat) => (

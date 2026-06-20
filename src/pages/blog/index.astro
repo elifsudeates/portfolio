@@ -8,18 +8,18 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
 );
 
 const fmt = (d: Date) =>
-  d.toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" });
+  d.toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" });
 ---
 
 <Base
-  title="Blog — Çağatay Üresin"
-  description="Technical notes by Çağatay Üresin on Kubernetes, GitOps, DevOps, self-hosted infrastructure, automation, and AI integrations."
+  title="Blog — Elif Sude Ateş"
+  description="Elif Sude Ateş tarafından yazılan teknik notlar ve makaleler."
   canonicalPath="/blog"
 >
   <section class="container" style="padding-top:48px">
     <h1 style="letter-spacing:-0.02em">Blog</h1>
     <p class="card-desc" style="margin-bottom:28px">
-      Notes on DevOps, Kubernetes, and AI.
+      Siber Güvenlik, DevOps, Kubernetes ve Yapay Zeka (AI) üzerine notlar.
     </p>
     <div class="card-grid">
       {

@@ -5,8 +5,8 @@ work in this repository. It is a project reference, not an agent prompt.
 
 ## Site Identity
 
-- Site owner: Çağatay Üresin
-- Site URL: `https://cagatayuresin.com`
+- Site owner: Elif Sude Ateş
+- Site URL: `https://elifsudeates.com`
 - Primary topics: Kubernetes, DevOps, GitOps, platform engineering, backend
   systems, self-hosted infrastructure, AI integrations, and open-source tools
 - Writing language for public technical posts: English
@@ -132,7 +132,7 @@ Composition:
   neumorphism, flat vector, soft 3D, editorial illustration, or technical
   diagram style.
 - Even when styles differ, keep the portfolio palette in mind and make
-  `#088395` or `#7ab2b2` feel like the primary accent.
+  `#546B41` or `#99AD7A` feel like the primary accent.
 
 ## Image Alt Text Standards
 

@@ -2,7 +2,7 @@
 // Token gerekmez ama rate limit (60/saat) düşük olduğu için CI'da
 // GITHUB_TOKEN env varsa onu kullanırız (5000/saat).
 
-const USERNAME = "cagatayuresin";
+const USERNAME = "elifsudeates";
 
 export interface Repo {
   name: string;

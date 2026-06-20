@@ -8,11 +8,11 @@ spec:
   ingressClassName: traefik
   tls:
     - hosts:
-        - cagatayuresin.com
-        - www.cagatayuresin.com
+        - elifsudeates.com
+        - www.elifsudeates.com
       secretName: portfolio-tls
   rules:
-    - host: cagatayuresin.com
+    - host: elifsudeates.com
       http:
         paths:
           - path: /
@@ -22,7 +22,7 @@ spec:
                 name: portfolio
                 port:
                   number: 80
-    - host: www.cagatayuresin.com
+    - host: www.elifsudeates.com
       http:
         paths:
           - path: /
